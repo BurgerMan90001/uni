@@ -109,6 +109,5 @@ public class CasigayPaulA1Q2 {
         System.out.print(planeHours + " hours, ");
         System.out.print(planeMinutes + " minutes, ");
         System.out.println("and " + planeSeconds + " seconds.");
-
     }
 }
