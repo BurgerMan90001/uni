@@ -153,11 +153,11 @@ public class CasigayPaulA1Q3 {
         /*
          * I tested my code by making orgin and destination w because they are not
          * important.
-         * System.out.println(currentTime);
-         * System.out.println(currentHour);
-         * System.out.println(currentMinute);
          * 
-         * 
+         * String orgin = w;
+         * String destination = w;
+         * String currentTime = 24:00; to test for the 24-hour formating of arrival times
+         * int distanceBetween = 1000000; make distance long enough to see days and hours work.
          */
     }
 }
