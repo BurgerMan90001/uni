@@ -1,9 +1,20 @@
-import java.io.IOException;
+
+/*
+* COMP 1010 SECTION A02
+* INSTRUCTOR: Emanuel Wiens 
+* STUDENT NAME: Paul Casigay
+* STUDENT NUMBER: 8061457
+* ASSIGNMENT: 1
+* QUESTION: 3
+*
+* PURPOSE: Calculate and show the amount of time to travel between two locations in days, hours, minutes, and seconds.
+* Takes input for orgin, destination, and current time. It also shows the arrival time in 24-hour time.
+*/
+
 import java.util.Scanner;
 
 public class CasigayPaulA1Q3 {
-    // thow IOException for user input errors
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
 
         // Unit conversion constants for seconds
@@ -19,11 +30,7 @@ public class CasigayPaulA1Q3 {
 
         String currentTime;
 
-        /*
-         * 2314 kilometres
-         * The distance between the orgin and destination converted to metres
-         * https://www.distance-cities.com
-         */
+        // The distance between the orgin and destination in metres
         int distanceBetween;
 
         // Get user input
@@ -40,11 +47,9 @@ public class CasigayPaulA1Q3 {
         int currentHour = Integer.parseInt(currentTime.substring(0, 2));
         int currentMinute = Integer.parseInt(currentTime.substring(3, 5));
 
-        /*
-         * Cycling speed for the Age range: 20-25
-         * https://pedalstreet.com/average-cycling-speed-by-age/
-         */
-        double cyclingSpeed = 8.31;
+        // an average cycling speed of 15km/hr
+        // https://pedalstreet.com/average-cycling-speed-by-age/
+        double cyclingSpeed = 4.31;
         /*
          * Average speed of Boeing 737
          * 975 km/h converted to metres per second
@@ -53,8 +58,8 @@ public class CasigayPaulA1Q3 {
          */
         double planeSpeed = 270.0;
 
-        // A car's average speed of 50km/hr in metres per second
-        double drivingSpeed = 13.89;
+        // A car's average speed of 32km/hr in metres per second
+        double drivingSpeed = 8.89;
         // 1 metre per second
         double walkingSpeed = 1.0;
 
@@ -156,8 +161,21 @@ public class CasigayPaulA1Q3 {
          * 
          * String orgin = w;
          * String destination = w;
-         * String currentTime = 24:00; to test for the 24-hour formating of arrival times
-         * int distanceBetween = 1000000; make distance long enough to see days and hours work.
+         * String currentTime = 24:00; to test for the correct 24-hour formating of
+         * arrival
+         * times
+         * int distanceBetween = 1000000; make distance long enough to see days and
+         * hours work.
+         * 
+         * To go from w to w, walking takes 11 days, 13 hours, 46 minutes, and 40
+         * seconds. Arrival at 13:46 +11 days.
+         * To go from w to w, driving takes 1 days, 7 hours, 14 minutes, and 45 seconds.
+         * Arrival at 7:14 +1 days.
+         * To go from w to w, cycling takes 2 days, 16 hours, 26 minutes, and 58
+         * seconds. Arrival at 16:26 +2 days.
+         * To go from w to w, flying takes 0 days, 1 hours, 1 minutes, and 43 seconds.
+         * Arrival at 1:1 +0 days.
+         * 24-hour time increments correctly and shows the additional amount of days.
          */
     }
 }

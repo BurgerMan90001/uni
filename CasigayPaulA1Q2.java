@@ -1,9 +1,19 @@
-import java.io.IOException;
+
+/*
+* COMP 1010 SECTION A02
+* INSTRUCTOR: Emanuel Wiens 
+* STUDENT NAME: Paul Casigay
+* STUDENT NUMBER: 8061457
+* ASSIGNMENT: 1
+* QUESTION: 2
+*
+* PURPOSE: Calculate and show the amount of time to travel between two locations in days, hours, minutes, and seconds.
+* Takes input for orgin and destination.
+*/
 import java.util.Scanner;
 
 public class CasigayPaulA1Q2 {
-    // thow IOException for user input errors
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
 
         // Unit conversion constants for seconds
@@ -14,11 +24,7 @@ public class CasigayPaulA1Q2 {
         String orgin;
         String destination;
 
-        /*
-         * 2314 kilometres
-         * The distance between the orgin and destination converted to metres
-         * https://www.distance-cities.com
-         */
+        // The distance between the orgin and destination in metres
         int distanceBetween;
 
         System.out.print("Orgin: ");
@@ -30,11 +36,9 @@ public class CasigayPaulA1Q2 {
         System.out.print("Distance between in metres: ");
         distanceBetween = scnr.nextInt();
 
-        /*
-         * Cycling speed for the Age range: 20-25
-         * https://pedalstreet.com/average-cycling-speed-by-age/
-         */
-        double cyclingSpeed = 8.31;
+        // an average cycling speed of 15km/hr
+        // https://pedalstreet.com/average-cycling-speed-by-age/
+        double cyclingSpeed = 4.31;
         /*
          * Average speed of Boeing 737
          * 975 km/h converted to metres per second
@@ -43,8 +47,8 @@ public class CasigayPaulA1Q2 {
          */
         double planeSpeed = 270.0;
 
-        // A car's average speed of 50km/hr in metres per second
-        double drivingSpeed = 13.89;
+        // A car's average speed of 32km/hr in metres per second
+        double drivingSpeed = 8.89;
         // 1 metre per second
         double walkingSpeed = 1.0;
 

@@ -1,3 +1,13 @@
+/*
+* COMP 1010 SECTION A02
+* INSTRUCTOR: Emanuel Wiens 
+* STUDENT NAME: Paul Casigay
+* STUDENT NUMBER: 8061457
+* ASSIGNMENT: 1
+* QUESTION: 1
+*
+* PURPOSE: Calculate and show the amount of time to travel between two locations in days, hours, minutes, and seconds.
+*/
 public class CasigayPaulA1Q1 {
     public static void main(String[] args) {
         final String ORGIN = "Winnipeg";
@@ -11,14 +21,12 @@ public class CasigayPaulA1Q1 {
          * The distance between the orgin and destination converted to metres
          * https://www.distance-cities.com
          */
-        int distanceBetween = 2314240;
+        // int distanceBetween = 2314240;
+        int distanceBetween = 1000;
 
-        /*
-         * 2314 kilometres
-         * Cycling speed for the Age range: 20-25
-         * https://pedalstreet.com/average-cycling-speed-by-age/
-         */
-        double cyclingSpeed = 8.31;
+        // an average cycling speed of 15km/hr
+        // https://pedalstreet.com/average-cycling-speed-by-age/
+        double cyclingSpeed = 4.31;
         /*
          * Average speed of Boeing 737
          * 975 km/h converted to metres per second
@@ -27,8 +35,8 @@ public class CasigayPaulA1Q1 {
          */
         double planeSpeed = 270.0;
 
-        // A car's average speed of 50km/hr in metres per second
-        double drivingSpeed = 13.89;
+        // A car's average speed of 32km/hr in metres per second
+        double drivingSpeed = 8.89;
         // 1 metre per second
         double walkingSpeed = 1.0;
 
@@ -101,11 +109,18 @@ public class CasigayPaulA1Q1 {
          * System.out.print(walkingHours);
          * System.out.print(walkingMinutes);
          * 
-         * Then, I compare them to calculations I did on paper.
-         * 
-         * Also tested by making distanceBetween bigger and smaller
-         * int distanceBetween = 2314240000;
-         * int distanceBetween = 23140;
+         * I also made the distance between 10000m and ajusted the speeds until
+         * resulting time is reasonable.
+         * distanceBetween = 1000;
+         * To go from Winnipeg to Vancouver, walking takes 0 days, 0 hours, 16 minutes,
+         * and 40 seconds.
+         * To go from Winnipeg to Vancouver, driving takes 0 days, 0 hours, 1 minutes,
+         * and 52 seconds.
+         * To go from Winnipeg to Vancouver, cycling takes 0 days, 0 hours, 3 minutes,
+         * and 52 seconds.
+         * To go from Winnipeg to Vancouver, flying takes 0 days, 0 hours, 0 minutes,
+         * and 3 seconds.
          */
     }
+
 }
