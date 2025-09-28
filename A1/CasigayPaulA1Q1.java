@@ -1,40 +1,29 @@
-
+package A1;
 /*
 * COMP 1010 SECTION A02
 * INSTRUCTOR: Emanuel Wiens 
 * STUDENT NAME: Paul Casigay
 * STUDENT NUMBER: 8061457
 * ASSIGNMENT: 1
-* QUESTION: 2
+* QUESTION: 1
 *
 * PURPOSE: Calculate and show the amount of time to travel between two locations in days, hours, minutes, and seconds.
-* Takes input for orgin and destination.
 */
-import java.util.Scanner;
-
-public class CasigayPaulA1Q2 {
+public class CasigayPaulA1Q1 {
     public static void main(String[] args) {
-        Scanner scnr = new Scanner(System.in);
+        final String ORGIN = "Winnipeg";
+        final String DESTINATION = "Vancouver";
 
         // Unit conversion constants for seconds
         final int SECONDS_PER_DAY = 86400;
         final int SECONDS_PER_HOUR = 3600;
         final int SECONDS_PER_MINUTE = 60;
-
-        String orgin;
-        String destination;
-
-        // The distance between the orgin and destination in metres
-        int distanceBetween;
-
-        System.out.print("Orgin: ");
-        orgin = scnr.nextLine();
-
-        System.out.print("Destination: ");
-        destination = scnr.nextLine();
-
-        System.out.print("Distance between in metres: ");
-        distanceBetween = scnr.nextInt();
+        /*
+         * The distance between the orgin and destination converted to metres
+         * https://www.distance-cities.com
+         */
+        // int distanceBetween = 2314240;
+        int distanceBetween = 1000;
 
         // an average cycling speed of 15km/hr
         // https://pedalstreet.com/average-cycling-speed-by-age/
@@ -53,7 +42,6 @@ public class CasigayPaulA1Q2 {
         double walkingSpeed = 1.0;
 
         // Total time for modes of transportation in seconds
-
         int walkingTime = (int) (distanceBetween / walkingSpeed);
 
         int walkingDays = walkingTime / SECONDS_PER_DAY;
@@ -62,7 +50,7 @@ public class CasigayPaulA1Q2 {
         int walkingSeconds = walkingTime % SECONDS_PER_DAY % SECONDS_PER_HOUR % SECONDS_PER_MINUTE;
 
         // Print the result for walking
-        System.out.print("To go from " + orgin + " to " + destination + ", ");
+        System.out.print("To go from " + ORGIN + " to " + DESTINATION + ", ");
         System.out.print("walking takes ");
         System.out.print(walkingDays + " days, ");
         System.out.print(walkingHours + " hours, ");
@@ -77,7 +65,7 @@ public class CasigayPaulA1Q2 {
         int drivingSeconds = drivingTime % SECONDS_PER_DAY % SECONDS_PER_HOUR % SECONDS_PER_MINUTE;
 
         // Print the result for driving
-        System.out.print("To go from " + orgin + " to " + destination + ", ");
+        System.out.print("To go from " + ORGIN + " to " + DESTINATION + ", ");
         System.out.print("driving takes ");
         System.out.print(drivingDays + " days, ");
         System.out.print(drivingHours + " hours, ");
@@ -92,7 +80,7 @@ public class CasigayPaulA1Q2 {
         int cyclingSeconds = cyclingTime % SECONDS_PER_DAY % SECONDS_PER_HOUR % SECONDS_PER_MINUTE;
 
         // Print the result for cycling
-        System.out.print("To go from " + orgin + " to " + destination + ", ");
+        System.out.print("To go from " + ORGIN + " to " + DESTINATION + ", ");
         System.out.print("cycling takes ");
         System.out.print(cyclingDays + " days, ");
         System.out.print(cyclingHours + " hours, ");
@@ -107,11 +95,33 @@ public class CasigayPaulA1Q2 {
         int planeSeconds = planeTime % SECONDS_PER_DAY % SECONDS_PER_HOUR % SECONDS_PER_MINUTE;
 
         // Print the result for flying
-        System.out.print("To go from " + orgin + " to " + destination + ", ");
+        System.out.print("To go from " + ORGIN + " to " + DESTINATION + ", ");
         System.out.print("flying takes ");
         System.out.print(planeDays + " days, ");
         System.out.print(planeHours + " hours, ");
         System.out.print(planeMinutes + " minutes, ");
         System.out.println("and " + planeSeconds + " seconds.");
+
+        /*
+         * I first tested the travel time calculations with walking and printed the
+         * results like this.
+         * 
+         * System.out.print(walkingDays);
+         * System.out.print(walkingHours);
+         * System.out.print(walkingMinutes);
+         * 
+         * I also made the distance between 10000m and ajusted the speeds until
+         * resulting time is reasonable.
+         * distanceBetween = 1000;
+         * To go from Winnipeg to Vancouver, walking takes 0 days, 0 hours, 16 minutes,
+         * and 40 seconds.
+         * To go from Winnipeg to Vancouver, driving takes 0 days, 0 hours, 1 minutes,
+         * and 52 seconds.
+         * To go from Winnipeg to Vancouver, cycling takes 0 days, 0 hours, 3 minutes,
+         * and 52 seconds.
+         * To go from Winnipeg to Vancouver, flying takes 0 days, 0 hours, 0 minutes,
+         * and 3 seconds.
+         */
     }
+
 }
