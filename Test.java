@@ -1,19 +1,15 @@
+import A1.CasigayPaulA1Q1;
 
-
-import java.util.Scanner;
-
-public class Test {
+class Test {
     public static void main(String[] args) {
-        String test = "1111";
-
-        System.out.println("wwwww");
-        Scanner scnr = new Scanner(System.in);
-
-        int num = Integer.parseInt("dddd123");
-        System.out.println(num);
-
-        scnr.close();
-
-        // System.out.printf("%s ", "asdasd");
+        Goof.mood();
     }
+}
+
+class Goof {
+    public static void mood() {
+        // oop 
+        System.out.println(Math.pow(1,10));
+    }
+    
 }
