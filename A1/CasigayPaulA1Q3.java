@@ -1,4 +1,3 @@
-package A1;
 
 /*
 * COMP 1010 SECTION A02
@@ -78,6 +77,7 @@ public class CasigayPaulA1Q3 {
          * Modulus divide results so that time is in 24-hour format.
          */
         int walkingArrivalHour = (currentHour + walkingHours) % HOURS_PER_DAY;
+        walkingArrivalHour += (currentMinute + walkingMinutes) / MINUTES_PER_HOUR;
         int walkingArrivalMinute = (currentMinute + walkingMinutes) % MINUTES_PER_HOUR;
 
         // Print the result for walking
@@ -87,7 +87,10 @@ public class CasigayPaulA1Q3 {
         System.out.print(walkingHours + " hours, ");
         System.out.print(walkingMinutes + " minutes, ");
         System.out.print("and " + walkingSeconds + " seconds. ");
-        System.out.print("Arrival at " + walkingArrivalHour + ":" + walkingArrivalMinute);
+        System.out.print("Arrival at ");
+        System.out.printf("%02d", walkingArrivalHour);
+        System.out.print(":");
+        System.out.printf("%02d", walkingArrivalMinute);
         System.out.println(" +" + walkingDays + " days.");
 
         // Total time for driving in seconds
@@ -100,6 +103,7 @@ public class CasigayPaulA1Q3 {
 
         // Calculate the arrival time for driving
         int drivingArrivalHour = (currentHour + drivingHours) % HOURS_PER_DAY;
+        drivingArrivalHour += (currentMinute + drivingMinutes) / MINUTES_PER_HOUR;
         int drivingArrivalMinute = (currentMinute + drivingMinutes) % MINUTES_PER_HOUR;
 
         // Print the result for driving
@@ -109,7 +113,10 @@ public class CasigayPaulA1Q3 {
         System.out.print(drivingHours + " hours, ");
         System.out.print(drivingMinutes + " minutes, ");
         System.out.print("and " + drivingSeconds + " seconds. ");
-        System.out.print("Arrival at " + drivingArrivalHour + ":" + drivingArrivalMinute);
+        System.out.print("Arrival at ");
+        System.out.printf("%02d", drivingArrivalHour);
+        System.out.print(":");
+        System.out.printf("%02d", drivingArrivalMinute);
         System.out.println(" +" + drivingDays + " days.");
 
         // Total time for cycling in seconds
@@ -122,6 +129,7 @@ public class CasigayPaulA1Q3 {
 
         // Calculate the arrival time for cycling
         int cyclingArrivalHour = (currentHour + cyclingHours) % HOURS_PER_DAY;
+        cyclingArrivalHour += (currentMinute + cyclingMinutes) / MINUTES_PER_HOUR;
         int cyclingArrivalMinute = (currentMinute + cyclingMinutes) % MINUTES_PER_HOUR;
 
         // Print the result for cycling
@@ -131,7 +139,10 @@ public class CasigayPaulA1Q3 {
         System.out.print(cyclingHours + " hours, ");
         System.out.print(cyclingMinutes + " minutes, ");
         System.out.print("and " + cyclingSeconds + " seconds. ");
-        System.out.print("Arrival at " + cyclingArrivalHour + ":" + cyclingArrivalMinute);
+        System.out.print("Arrival at ");
+        System.out.printf("%02d", cyclingArrivalHour);
+        System.out.print(":");
+        System.out.printf("%02d", cyclingArrivalMinute);
         System.out.println(" +" + cyclingDays + " days.");
 
         // Total time for flying in seconds
@@ -144,6 +155,7 @@ public class CasigayPaulA1Q3 {
 
         // Calculate the arrival time for flying
         int planeArrivalHour = (currentHour + planeHours) % HOURS_PER_DAY;
+        planeArrivalHour += (currentMinute + planeMinutes) / MINUTES_PER_HOUR;
         int planeArrivalMinute = (currentMinute + planeMinutes) % MINUTES_PER_HOUR;
 
         // Print the result for flying
@@ -153,7 +165,10 @@ public class CasigayPaulA1Q3 {
         System.out.print(planeHours + " hours, ");
         System.out.print(planeMinutes + " minutes, ");
         System.out.print("and " + planeSeconds + " seconds. ");
-        System.out.print("Arrival at " + planeArrivalHour + ":" + planeArrivalMinute);
+        System.out.print("Arrival at ");
+        System.out.printf("%02d", planeArrivalHour);
+        System.out.print(":");
+        System.out.printf("%02d", planeArrivalMinute);
         System.out.println(" +" + planeDays + " days.");
 
         /*
