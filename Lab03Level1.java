@@ -65,18 +65,15 @@ class Lab03Level1 {
     }
 
     static String getMiddleWord(String string) {
-        /*
-         * int firstSpaceIndex = string.indexOf(" ") + 1;
-         * String test = string.substring(firstSpaceIndex, string.length());
-         * 
-         * int lastSpaceIndex = test.lastIndexOf(" ") + 1;
-         * String middleWord = test.substring(lastSpaceIndex, test.length());
-         */
         int middleIndex = string.length() / 2;
+
         String first = string.substring(0, middleIndex);
         String second = string.substring(middleIndex, string.length());
 
-        String middleWord = string.substring(first.lastIndexOf(' '), second.indexOf(' ') + first.length())
+        int firstSpaceIndex = first.lastIndexOf(' ');
+        int lastSpaceIndex = second.indexOf(' ') + first.length();
+
+        String middleWord = string.substring(firstSpaceIndex, lastSpaceIndex);
 
         return middleWord;
     }
