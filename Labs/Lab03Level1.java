@@ -1,3 +1,4 @@
+package Labs;
 //COMP 1010 Fall 2025 Lab 3, Level 1 Template
 
 import java.util.Scanner;
