@@ -1,14 +1,15 @@
 
 class Test {
-    public static void main(String[] args) {
-        Goof.mood();
+    public static void main() {
+        // oop
+        // prints 10
+        String name = getName();
+        System.out.println(name);
     }
-}
 
-class Goof {
-    public static void mood() {
-        // oop 
-        System.out.println(Math.pow(1,10));
+    static String getName() {
+        String name = "Paul";
+        return name;
     }
-    
+
 }

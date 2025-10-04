@@ -14,7 +14,8 @@ package A1;
 import java.util.Scanner;
 
 public class CasigayPaulA1Q3 {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws Exception {
         Scanner scnr = new Scanner(System.in);
 
         // Unit conversion constants for seconds
@@ -152,7 +153,7 @@ public class CasigayPaulA1Q3 {
         int planeHours = planeTime % SECONDS_PER_DAY / SECONDS_PER_HOUR;
         int planeMinutes = planeTime % SECONDS_PER_DAY % SECONDS_PER_HOUR / SECONDS_PER_MINUTE;
         int planeSeconds = planeTime % SECONDS_PER_DAY % SECONDS_PER_HOUR % SECONDS_PER_MINUTE;
-        
+
         // Calculate the arrival time for flying
         int planeArrivalHour = (currentHour + planeHours) % HOURS_PER_DAY;
         planeArrivalHour += (currentMinute + planeMinutes) / MINUTES_PER_HOUR;
