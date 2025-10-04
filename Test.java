@@ -1,4 +1,3 @@
-import A1.CasigayPaulA1Q1;
 
 class Test {
     public static void main(String[] args) {
