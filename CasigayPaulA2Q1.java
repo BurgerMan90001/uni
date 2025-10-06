@@ -30,12 +30,16 @@ public class CasigayPaulA2Q1 {
         System.out.println(" ---Testing stamp method");
 
         // testing for index out of bounds crashes
+        System.out.print("Result of stamping \"" + word1 + "\": ");
+        System.out.print(word1);
+        System.out.println(" Expected: " + "expected");
         testStamp(word1, die, "", 0);
         testStamp(word1, die, "", 1);
         testStamp(word1, die, "", 2);
         testStamp(word1, die, "", 3);
         testStamp(word1, die, "", 4);
         // testing for index out of bounds crashes
+
         testStamp(word1, die, "", word1.length() - 1);
 
         testSuite();
@@ -51,7 +55,7 @@ public class CasigayPaulA2Q1 {
         String stampedWord = stamp(word, die, startIndex);
         System.out.print("Result of stamping \"" + word + "\": ");
         System.out.print(stampedWord);
-        System.out.println(", Expected: " + expected);
+        System.out.println(" Expected: " + expected);
     }
     /*
      * 
@@ -119,9 +123,9 @@ public class CasigayPaulA2Q1 {
         String firstPart = word.substring(0, startIndex);
         // stamp the die to the first part of the word
         String stampedWord = firstPart + die;
-
+        // reduce the stamped word length to original word length
         stampedWord = reduce(stampedWord, word.length());
-
+        // get the rest after the stamped part and add it to the stamped word
         String secondPart = word.substring(stampedWord.length(), word.length());
         stampedWord += secondPart;
 
