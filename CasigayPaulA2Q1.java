@@ -22,18 +22,23 @@ public class CasigayPaulA2Q1 {
         String upsetWord = upset(word1, 4, 7);
         String punchedWord = punch(word1, 5);
 
-        System.out.println(drawnOutWord);
-        System.out.println(shrunkWord);
-        System.out.println(upsetWord);
-        System.out.println(punchedWord);
+        System.out.print("Result of drawing out \"" + drawnOutWord + "\": ");
+        System.out.print("Result of shrinking \"" + shrunkWord + "\": ");
+        System.out.print("Result of upsetting \"" + upsetWord + "\": ");
+        System.out.print("Result of punching \"" + punchedWord + "\": ");
+
         System.out.println(" ---Testing stamp method");
 
         // testing for index out of bounds crashes
-        testStamp(word1, die, 0);
-        testStamp(word1, die, 1);
-        testStamp(word1, die, 4);
+        testStamp(word1, die, "", 0);
+        testStamp(word1, die, "", 1);
+        testStamp(word1, die, "", 2);
+        testStamp(word1, die, "", 3);
+        testStamp(word1, die, "", 4);
         // testing for index out of bounds crashes
-        testStamp(word1, die, 7);
+        testStamp(word1, die, "", word1.length() - 1);
+
+        testSuite();
 
         System.out.println("Program terminated successfully.");
     }
@@ -42,15 +47,18 @@ public class CasigayPaulA2Q1 {
 
     }
 
-    static void testStamp(String word, String die, int startIndex) {
+    static void testStamp(String word, String die, String expected, int startIndex) {
         String stampedWord = stamp(word, die, startIndex);
-        printTest("stamping", word);
-        System.out.println(stampedWord);
+        System.out.print("Result of stamping \"" + word + "\": ");
+        System.out.print(stampedWord);
+        System.out.println(", Expected: " + expected);
     }
-
-    static void printTest(String methodName, String testedWord) {
-        System.out.print("Result of " + methodName + " \"" + testedWord + "\": ");
-    }
+    /*
+     * 
+     * static void printTest(String methodName, String testedWord) {
+     * System.out.print("Result of " + methodName + " \"" + testedWord + "\": ");
+     * }
+     */
 
     // duplicates a character in a word at the specified index
     static String drawOut(String word, int index) {
@@ -109,14 +117,13 @@ public class CasigayPaulA2Q1 {
     // stamps an 'die' word into a word at the specified starting index
     static String stamp(String word, String die, int startIndex) {
         String firstPart = word.substring(0, startIndex);
-
+        // stamp the die to the first part of the word
         String stampedWord = firstPart + die;
 
-        String secondPart = word.substring(stampedWord.length() - startIndex + 1, word.length());
-
-        stampedWord += secondPart;
-
         stampedWord = reduce(stampedWord, word.length());
+
+        String secondPart = word.substring(stampedWord.length(), word.length());
+        stampedWord += secondPart;
 
         return stampedWord;
     }
