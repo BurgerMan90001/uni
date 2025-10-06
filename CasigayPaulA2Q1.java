@@ -17,19 +17,24 @@ public class CasigayPaulA2Q1 {
         // word = "SmiTHiNg";
         // word = "SmiiTHiNG";
 
-        // System.out.println("max index: " + (word.length() - 1));
-
         String drawnOutWord = drawOut(word1, 2);
-        String shrunkWord = shrinking(word2, 4, 7);
-        String upsetWord = upsetting(word1, 4, 7);
-        String punchedWord = punching(word1, 5);
-        String stampedWord = stamping(word1, die, 1);
+        String shrunkWord = shrink(word2, 4, 7);
+        String upsetWord = upset(word1, 4, 7);
+        String punchedWord = punch(word1, 5);
 
         System.out.println(drawnOutWord);
         System.out.println(shrunkWord);
         System.out.println(upsetWord);
         System.out.println(punchedWord);
-        System.out.println(stampedWord);
+        System.out.println(" ---Testing stamp method");
+
+        // testing for index out of bounds crashes
+        testStamp(word1, die, 0);
+        testStamp(word1, die, 1);
+        testStamp(word1, die, 4);
+        // testing for index out of bounds crashes
+        testStamp(word1, die, 7);
+
         System.out.println("Program terminated successfully.");
     }
 
@@ -37,11 +42,21 @@ public class CasigayPaulA2Q1 {
 
     }
 
+    static void testStamp(String word, String die, int startIndex) {
+        String stampedWord = stamp(word, die, startIndex);
+        printTest("stamping", word);
+        System.out.println(stampedWord);
+    }
+
+    static void printTest(String methodName, String testedWord) {
+        System.out.print("Result of " + methodName + " \"" + testedWord + "\": ");
+    }
+
+    // duplicates a character in a word at the specified index
     static String drawOut(String word, int index) {
         char character = word.charAt(index);
-        // get the first half of the word
+
         String firstPart = word.substring(0, index);
-        // get the second half of the word
         String secondPart = word.substring(index, word.length());
         // put the indexed char and put in between first and second halves
         String drawnOutWord = firstPart + character + secondPart;
@@ -49,36 +64,35 @@ public class CasigayPaulA2Q1 {
         return drawnOutWord;
     }
 
-    static String shrinking(String word, int startIndex, int endIndex) {
-        // get the first half of the word
+    // changes all letters in specified range to lowercase
+    static String shrink(String word, int startIndex, int endIndex) {
         String firstPart = word.substring(0, startIndex);
         // get the specified range of the word and convert to lowercase
         String secondPart = word.substring(startIndex, endIndex).toLowerCase();
         // get the rest of the word after the specified range
         String thirdPart = word.substring(endIndex, word.length());
-        // concatenate the string
+
         String shrinkedWord = firstPart + secondPart + thirdPart;
 
         return shrinkedWord;
     }
 
-    static String upsetting(String word, int startIndex, int endIndex) {
-        // get the first half of the word
+    // changes all letters in specified range to uppercase
+    static String upset(String word, int startIndex, int endIndex) {
         String firstPart = word.substring(0, startIndex);
         // get the specified range of the word and convert to lowercase
         String secondPart = word.substring(startIndex, endIndex).toUpperCase();
         // get the rest of the word after the specified range
         String thirdPart = word.substring(endIndex, word.length());
-        // concatenate the string
+
         String upsetWord = firstPart + secondPart + thirdPart;
 
         return upsetWord;
     }
 
-    static String punching(String word, int index) {
-        // get the first half of the word
+    // creates a space in a word at the specified index
+    static String punch(String word, int index) {
         String firstPart = word.substring(0, index);
-        // get the second half of the word
         String secondPart = word.substring(index, word.length());
         // put a space in between first and second halves
         String drawnOutWord = firstPart + " " + secondPart;
@@ -86,44 +100,32 @@ public class CasigayPaulA2Q1 {
         return drawnOutWord;
     }
 
-    static String welding(String firstWord, String secondWord) {
-        // concatenate the words to weld them together
+    // concatenates words together like welding metal
+    static String weld(String firstWord, String secondWord) {
         String weldedWord = firstWord + secondWord;
         return weldedWord;
     }
 
-    static String stamping(String word, String die, int startIndex) {
-        int originalWordLength = word.length();
-        int test = startIndex + die.length();
-        // int yes = (test - word.length());
-        // test = test - (test % word.length());
-
+    // stamps an 'die' word into a word at the specified starting index
+    static String stamp(String word, String die, int startIndex) {
         String firstPart = word.substring(0, startIndex);
 
         String stampedWord = firstPart + die;
-        // int yes = startIndex + die.length();
-        System.out.println(stampedWord.length());
-        String secondPart = word.substring(startIndex, word.length());
+
+        String secondPart = word.substring(stampedWord.length() - startIndex + 1, word.length());
+
         stampedWord += secondPart;
 
-        // stampedWord = stampedWord.substring(0, yes);
-
-        // int test = startIndex + die.length();
-
-        // System.out.println(yes);
-        // int test = stampedWord.length();
-
-        // String first = stampedWord.substring(0, die.length() + 1);
-        // String second = stampedWord.substring(test - die.length() + 1,
-        // stampedWord.length());
-
-        // stampedWord = first + second;
-        // stampedWord = stampedWord.substring(die.length() + 1, test - die.length());
-
-        // return stampedWord.substring(0, originalWordLength);
-        // return stampedWord.substring(0, firstPart.length() + die.length());
+        stampedWord = reduce(stampedWord, word.length());
 
         return stampedWord;
+    }
+
+    // shortens a string to specified length.
+    static String reduce(String word, int length) {
+        // to avoid index out of bounds exception by using substring
+        String reducedWord = String.format("%." + length + "s", word);
+        return reducedWord;
     }
 
 }
