@@ -53,9 +53,9 @@ public class CasigayPaulA2Q1 {
 
     static void testStamp(String word, String die, String expected, int startIndex) {
         String stampedWord = stamp(word, die, startIndex);
-        System.out.print("Result of stamping \"" + word + "\": ");
+        System.out.print("Result of stamping \"" + word + "\" at index " + startIndex + ": ");
         System.out.print(stampedWord);
-        System.out.println(" Expected: " + expected);
+        System.out.println(", Expected: " + expected);
     }
     /*
      * 
