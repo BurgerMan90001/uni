@@ -9,6 +9,12 @@
 * PURPOSE: Performs smithing operations on words with techniques like welding, stamping, punching, and shrinking.
 */
 public class CasigayPaulA2Q1 {
+    static void printTest(String methodName, String word, String result, String expected) {
+        System.out.print("Result of " + methodName + " out \"" + word + "\": ");
+        System.out.print(result);
+        System.out.println(", Expected: " + expected);
+    }
+
     public static void main(String[] args) {
         String word1 = "smithing";
         String word2 = "SMITHING";
@@ -22,29 +28,42 @@ public class CasigayPaulA2Q1 {
         String upsetWord = upset(word1, 4, 7);
         String punchedWord = punch(word1, 5);
 
-        System.out.print("Result of drawing out \"" + drawnOutWord + "\": ");
-        System.out.print("Result of shrinking \"" + shrunkWord + "\": ");
-        System.out.print("Result of upsetting \"" + upsetWord + "\": ");
-        System.out.print("Result of punching \"" + punchedWord + "\": ");
+        System.out.print("Result of drawing out \"" + word1 + "\": ");
+        System.out.print(drawnOutWord);
 
-        System.out.println(" ---Testing stamp method");
+        System.out.println(", Expected: " + "expected");
+        System.out.println("Result of shrinking \"" + word2 + "\": ");
 
-        // testing for index out of bounds crashes
+        System.out.print(shrunkWord);
+        System.out.println(", Expected: " + "expected");
+
+        System.out.print("Result of upsetting \"" + word1 + "\": ");
+        System.out.print(upsetWord);
+        System.out.println(", Expected: " + "expected");
+
+        System.out.print("Result of punching \"" + word1 + "\": ");
+        System.out.print(punchedWord);
+        System.out.println(", Expected: " + "expected");
+
         System.out.print("Result of stamping \"" + word1 + "\": ");
         System.out.print(word1);
-        System.out.println(" Expected: " + "expected");
-        testStamp(word1, die, "", 0);
-        testStamp(word1, die, "", 1);
-        testStamp(word1, die, "", 2);
-        testStamp(word1, die, "", 3);
-        testStamp(word1, die, "", 4);
-        // testing for index out of bounds crashes
+        System.out.println(", Expected: " + "expected");
 
+        // testing for index out of bounds crashes
+        testStamp(word1, die, "", 0);
+        // testing for index out of bounds crashes
         testStamp(word1, die, "", word1.length() - 1);
 
         testSuite();
 
         System.out.println("Program terminated successfully.");
+    }
+
+    static void smithWord(String word, String die) {
+        String drawnOutWord = drawOut(word, 2);
+        String shrunkWord = shrink(drawnOutWord, 4, 7);
+        String upsetWord = upset(shrunkWord, 4, 7);
+        String punchedWord = punch(upsetWord, 5);
     }
 
     static void testSuite() {
