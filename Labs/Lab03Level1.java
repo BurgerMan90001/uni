@@ -14,13 +14,8 @@ class Lab03Level1 {
         // String input = keyIn.nextLine();
         String input = "This is a test woow";
 
-        // TO DO: Replace "first" with call to method to get first word
         String firstWord = getFirstWord(input);
-
-        // TO DO: Replace "last" with call to method to get last word
         String lastWord = getLastWord(input);
-
-        // TO DO: Replace "middle" with call to method to get middle word
         String middleWord = getMiddleWord(input);
 
         System.out.println("The first word was \"" + firstWord +
@@ -39,16 +34,7 @@ class Lab03Level1 {
     static String getFirstWord(String string) {
         String firstWord;
         int firstSpaceIndex = string.indexOf(' ');
-        // System.out.println(string.length());
-        /*
-         * if (firstSpaceIndex == -1 && string.length() > 1) {
-         * firstWord = string.substring(0, string.length() - 1);
-         * } else if (firstSpaceIndex == -1 && string.length() <= 1) {
-         * firstWord = "empty string";
-         * } else {
-         * firstWord = string.substring(0, firstSpaceIndex);
-         * }
-         */
+
         firstWord = string.substring(0, firstSpaceIndex);
         return firstWord;
     }
@@ -78,4 +64,5 @@ class Lab03Level1 {
 
         return middleWord;
     }
+
 }
