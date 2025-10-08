@@ -28,11 +28,9 @@ public class CasigayPaulA2Q1 {
         String upsetWord = upset(word1, 4, 7);
         String punchedWord = punch(word1, 5);
 
-        System.out.print("Result of drawing out \"" + word1 + "\": ");
-        System.out.print(drawnOutWord);
+        printTest("drawOut", word1, drawnOutWord, "expected");
 
-        System.out.println(", Expected: " + "expected");
-        System.out.println("Result of shrinking \"" + word2 + "\": ");
+        System.out.print("Result of shrinking \"" + word2 + "\": ");
 
         System.out.print(shrunkWord);
         System.out.println(", Expected: " + "expected");
@@ -61,9 +59,11 @@ public class CasigayPaulA2Q1 {
 
     static void smithWord(String word, String die) {
         String drawnOutWord = drawOut(word, 2);
+        printTest("drawOut", word, drawnOutWord, "expected");
         String shrunkWord = shrink(drawnOutWord, 4, 7);
         String upsetWord = upset(shrunkWord, 4, 7);
         String punchedWord = punch(upsetWord, 5);
+        String stampedWord = stamp(punchedWord, die, 1);
     }
 
     static void testSuite() {
