@@ -8,14 +8,14 @@
 *
 * PURPOSE: Performs smithing operations on words with techniques like welding, stamping, punching, and shrinking.
 */
-public class CasigayPaulA2Q1 {
+public class CasigayPaulA2Q2 {
     public static void main(String[] args) {
         // lowercase and capitalized letters for showing shrink and upset
         String word1 = "smithing";
         String word2 = "SMITHING";
         String die = "die";
 
-        testSuite(word1, word2, die);
+        // testSuite(word1, word2, die);
 
         System.out.println("Program terminated successfully.");
     }
