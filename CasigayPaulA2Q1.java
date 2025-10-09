@@ -9,79 +9,91 @@
 * PURPOSE: Performs smithing operations on words with techniques like welding, stamping, punching, and shrinking.
 */
 public class CasigayPaulA2Q1 {
-    static void printTest(String methodName, String word, String result, String expected) {
-        System.out.print("Result of " + methodName + " out \"" + word + "\": ");
-        System.out.print(result);
-        System.out.println(", Expected: " + expected);
-    }
-
     public static void main(String[] args) {
+        // lowercase and capitalized letters for showing shrink and upset
         String word1 = "smithing";
         String word2 = "SMITHING";
-        String die = "hear";
-        // word = "tEsT";
-        // word = "SmiTHiNg";
-        // word = "SmiiTHiNG";
+        String die = "die";
 
-        String drawnOutWord = drawOut(word1, 2);
-        String shrunkWord = shrink(word2, 4, 7);
-        String upsetWord = upset(word1, 4, 7);
-        String punchedWord = punch(word1, 5);
-
-        printTest("drawOut", word1, drawnOutWord, "expected");
-
-        System.out.print("Result of shrinking \"" + word2 + "\": ");
-
-        System.out.print(shrunkWord);
-        System.out.println(", Expected: " + "expected");
-
-        System.out.print("Result of upsetting \"" + word1 + "\": ");
-        System.out.print(upsetWord);
-        System.out.println(", Expected: " + "expected");
-
-        System.out.print("Result of punching \"" + word1 + "\": ");
-        System.out.print(punchedWord);
-        System.out.println(", Expected: " + "expected");
-
-        System.out.print("Result of stamping \"" + word1 + "\": ");
-        System.out.print(word1);
-        System.out.println(", Expected: " + "expected");
-
-        // testing for index out of bounds crashes
-        testStamp(word1, die, "", 0);
-        // testing for index out of bounds crashes
-        testStamp(word1, die, "", word1.length() - 1);
-
-        testSuite();
+        testSuite(word1, word2, die);
 
         System.out.println("Program terminated successfully.");
     }
 
+    static void testSuite(String word1, String word2, String die) {
+        int test = word1.length();
+        // retrive the smithed words
+        String drawnOutWord = drawOut(word1, 0);
+        String shrunkWord = shrink(word2, 4, 7);
+        String upsetWord = upset(word1, 4, 7);
+        String weldedWord = weld(word1, word2);
+        String punchedWord = punch(word1, 5);
+        String stampedWord = stamp(word1, die, 2);
+
+        System.out.println("----> TEST SUITE START");
+
+        System.out.println(" > Drawing out \"" + word1 + "\" at 1: ");
+        printResult(drawnOutWord, "ssmithing");
+
+        System.out.println(" > Shrinking \"" + word2 + "\" from 4 to 7: ");
+        printResult(shrunkWord, "SMIThing");
+
+        System.out.println(" > Upsetting \"" + word1 + "\" from 4 to 7: ");
+        printResult(upsetWord, "smitHINg");
+
+        System.out.println(" > Welding \"" + word1 + "\" and \"" + word2 + "\": ");
+        printResult(weldedWord, "smithingSMITHING");
+
+        System.out.println(" > Punching \"" + word1 + "\" at 5: ");
+        printResult(punchedWord, "smith ing");
+
+        // testing for index out of bounds crashes
+        System.out.println(" > Stamping \"" + word1 + "\" with \"" + die + "\" at 2: ");
+        printResult(stampedWord, "smhearng");
+
+        smithWord(word1, die);
+
+        System.out.println("----> TEST SUITE END");
+    }
+
     static void smithWord(String word, String die) {
+        System.out.println(" ----> Smithing the word \"" + word + "\"");
         String drawnOutWord = drawOut(word, 2);
-        printTest("drawOut", word, drawnOutWord, "expected");
+        System.out.println("-Drawing out \"" + word + "\" at 2");
+        printResult(drawnOutWord);
+
         String shrunkWord = shrink(drawnOutWord, 4, 7);
+        System.out.println("-Shrinking \"" + drawnOutWord + "\" at 4 to 7");
+        printResult(shrunkWord);
+
         String upsetWord = upset(shrunkWord, 4, 7);
-        String punchedWord = punch(upsetWord, 5);
-        String stampedWord = stamp(punchedWord, die, 1);
+        System.out.println("-Upsetting \"" + shrunkWord + "\" at 4 to 7");
+        printResult(upsetWord);
+
+        String weldedWord = weld(upsetWord, word);
+        System.out.println("-Welding \"" + upsetWord + "\" with \"" + word + "\"");
+        printResult(weldedWord);
+
+        String punchedWord = punch(weldedWord, 5);
+        System.out.println("-Punching \"" + word + "\" at 5");
+        printResult(punchedWord);
+
+        String stampedWord = stamp(punchedWord, die, 2);
+        System.out.println("-Stamping \"" + word + "\" at 2");
+
+        System.out.println("Final result of smithWord: " + stampedWord);
     }
 
-    static void testSuite() {
-
+    // prints resulting word and the expected word
+    static void printResult(String result, String expected) {
+        System.out.println("Result:   " + result);
+        System.out.println("Expected: " + expected);
     }
 
-    static void testStamp(String word, String die, String expected, int startIndex) {
-        String stampedWord = stamp(word, die, startIndex);
-        System.out.print("Result of stamping \"" + word + "\" at index " + startIndex + ": ");
-        System.out.print(stampedWord);
-        System.out.println(", Expected: " + expected);
+    // only prints resulting word
+    static void printResult(String result) {
+        System.out.println("Result:   " + result);
     }
-    /*
-     * 
-     * static void printTest(String methodName, String testedWord) {
-     * System.out.print("Result of " + methodName + " \"" + testedWord + "\": ");
-     * }
-     */
 
     // duplicates a character in a word at the specified index
     static String drawOut(String word, int index) {
@@ -143,19 +155,11 @@ public class CasigayPaulA2Q1 {
         // stamp the die to the first part of the word
         String stampedWord = firstPart + die;
         // reduce the stamped word length to original word length
-        stampedWord = reduce(stampedWord, word.length());
+        stampedWord = String.format("%." + word.length() + "s", stampedWord);
         // get the rest after the stamped part and add it to the stamped word
         String secondPart = word.substring(stampedWord.length(), word.length());
         stampedWord += secondPart;
 
         return stampedWord;
     }
-
-    // shortens a string to specified length.
-    static String reduce(String word, int length) {
-        // to avoid index out of bounds exception by using substring
-        String reducedWord = String.format("%." + length + "s", word);
-        return reducedWord;
-    }
-
 }
