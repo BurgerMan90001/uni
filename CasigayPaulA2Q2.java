@@ -6,8 +6,11 @@
 * ASSIGNMENT: 2
 * QUESTION: 1
 *
-* PURPOSE: Performs smithing operations on words with techniques like welding, stamping, punching, and shrinking.
+* PURPOSE: Performs smithing operations on words with techniques such as welding, stamping, punching, and shrinking.
 */
+
+import java.util.Scanner;
+
 public class CasigayPaulA2Q2 {
     public static void main(String[] args) {
         // lowercase and capitalized letters for showing shrink and upset
@@ -96,6 +99,18 @@ public class CasigayPaulA2Q2 {
 
     // duplicates a character in a word at the specified index
     static String drawOut(String word, int index) {
+        char character = word.charAt(index);
+
+        String firstPart = word.substring(0, index);
+        String secondPart = word.substring(index, word.length());
+        // put the indexed char and put in between first and second halves
+        String drawnOutWord = firstPart + character + secondPart;
+
+        return drawnOutWord;
+    }
+
+    static String drawOut(String word, Scanner scnr) {
+        int index = scnr.nextInt();
         char character = word.charAt(index);
 
         String firstPart = word.substring(0, index);

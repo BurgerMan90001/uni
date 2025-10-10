@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 class Test {
     public static void main(String[] args) {
-        test1();
+        test2();
     }
 
     static void q4() {
@@ -17,7 +17,9 @@ class Test {
     }
 
     static void test1() {
+
         String words = "wop wop wop opw opw";
+        String test = " \' \' awdadw";
 
         Scanner scnr = new Scanner(System.in);
 
@@ -31,6 +33,15 @@ class Test {
         System.out.println(a);
         System.out.println(b);
         System.out.println(c);
+
+    }
+
+    static void test2() {
+        double num = 12.234;
+        System.out.printf("%-5s\n", "aw");
+        System.out.printf("%07d\n", 12);
+
+        System.out.printf("%010.3f\n", 12.234);
     }
 
 }

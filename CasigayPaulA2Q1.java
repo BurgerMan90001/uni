@@ -6,7 +6,7 @@
 * ASSIGNMENT: 2
 * QUESTION: 1
 *
-* PURPOSE: Performs smithing operations on words with techniques like welding, stamping, punching, and shrinking.
+* PURPOSE: Performs smithing operations on words with techniques such as welding, stamping, punching, and shrinking.
 */
 public class CasigayPaulA2Q1 {
     public static void main(String[] args) {
