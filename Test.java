@@ -2,7 +2,8 @@ import java.util.Scanner;
 
 class Test {
     public static void main(String[] args) {
-        test2();
+        // test2();
+        test();
     }
 
     static void q4() {
@@ -14,6 +15,20 @@ class Test {
         System.out.println(test2);
         System.out.println(test3);
         System.out.println(test4);
+    }
+
+    static void test() {
+        String coord = "302,211,133";
+        int firstCommaIndex = coord.indexOf(',');
+        int secondCommaIndex = coord.lastIndexOf(',');
+
+        int x = Integer.parseInt(coord.substring(0, firstCommaIndex));
+        int y = Integer.parseInt(coord.substring(firstCommaIndex + 1, secondCommaIndex));
+        int z = Integer.parseInt(coord.substring(secondCommaIndex + 1, coord.length()));
+
+        System.out.println(x);
+        System.out.println(y);
+        System.out.println(z);
     }
 
     static void test1() {

@@ -21,33 +21,25 @@ public class CasigayPaulA2Q1 {
     }
 
     static void testSuite(String word1, String word2, String die) {
-        // retrive the smithed words
-        String drawnOutWord = drawOut(word1, 0);
-        String shrunkWord = shrink(word2, 4, 7);
-        String upsetWord = upset(word1, 4, 7);
-        String weldedWord = weld(word1, word2);
-        String punchedWord = punch(word1, 5);
-        String stampedWord = stamp(word1, die, 2);
-
         System.out.println("----> TEST SUITE START");
 
-        System.out.println(" > Drawing out \"" + word1 + "\" at 1: ");
+        String drawnOutWord = drawOut(word1, 0);
         printResult(drawnOutWord, "ssmithing");
 
-        System.out.println(" > Shrinking \"" + word2 + "\" from 4 to 7: ");
+        String shrunkWord = shrink(word2, 4, 7);
         printResult(shrunkWord, "SMIThing");
 
-        System.out.println(" > Upsetting \"" + word1 + "\" from 4 to 7: ");
+        String upsetWord = upset(word1, 4, 7);
         printResult(upsetWord, "smitHINg");
 
-        System.out.println(" > Welding \"" + word1 + "\" and \"" + word2 + "\": ");
+        String weldedWord = weld(word1, word2);
         printResult(weldedWord, "smithingSMITHING");
 
-        System.out.println(" > Punching \"" + word1 + "\" at 5: ");
+        String punchedWord = punch(word1, 5);
         printResult(punchedWord, "smith ing");
 
         // testing for index out of bounds crashes
-        System.out.println(" > Stamping \"" + word1 + "\" with \"" + die + "\" at 2: ");
+        String stampedWord = stamp(word1, die, 2);
         printResult(stampedWord, "smhearng");
 
         smithWord(word1, die);
@@ -55,30 +47,26 @@ public class CasigayPaulA2Q1 {
         System.out.println("----> TEST SUITE END");
     }
 
+    // performs all smithing operations consecutively on a single word
     static void smithWord(String word, String die) {
         System.out.println(" ----> Smithing the word \"" + word + "\"");
+
         String drawnOutWord = drawOut(word, 2);
-        System.out.println("-Drawing out \"" + word + "\" at 2");
         printResult(drawnOutWord);
 
         String shrunkWord = shrink(drawnOutWord, 4, 7);
-        System.out.println("-Shrinking \"" + drawnOutWord + "\" at 4 to 7");
         printResult(shrunkWord);
 
         String upsetWord = upset(shrunkWord, 4, 7);
-        System.out.println("-Upsetting \"" + shrunkWord + "\" at 4 to 7");
         printResult(upsetWord);
 
         String weldedWord = weld(upsetWord, word);
-        System.out.println("-Welding \"" + upsetWord + "\" with \"" + word + "\"");
         printResult(weldedWord);
 
         String punchedWord = punch(weldedWord, 5);
-        System.out.println("-Punching \"" + word + "\" at 5");
         printResult(punchedWord);
 
         String stampedWord = stamp(punchedWord, die, 2);
-        System.out.println("-Stamping \"" + word + "\" at 2");
 
         System.out.println("Final result of smithWord: " + stampedWord);
     }
@@ -91,7 +79,7 @@ public class CasigayPaulA2Q1 {
 
     // only prints resulting word
     static void printResult(String result) {
-        System.out.println("Result:   " + result);
+        System.out.println("Result: " + result);
     }
 
     // duplicates a character in a word at the specified index
@@ -103,11 +91,15 @@ public class CasigayPaulA2Q1 {
         // put the indexed char and put in between first and second halves
         String drawnOutWord = firstPart + character + secondPart;
 
+        System.out.println(" > Drawing out \"" + word + "\" at " + index);
+
         return drawnOutWord;
     }
 
     // changes all letters in specified range to lowercase
     static String shrink(String word, int startIndex, int endIndex) {
+        System.out.println(" > Shrinking \"" + word + "\" at " + startIndex + " to " + endIndex);
+
         String firstPart = word.substring(0, startIndex);
         // get the specified range of the word and convert to lowercase
         String secondPart = word.substring(startIndex, endIndex).toLowerCase();
@@ -129,6 +121,8 @@ public class CasigayPaulA2Q1 {
 
         String upsetWord = firstPart + secondPart + thirdPart;
 
+        System.out.println(" > Upsetting \"" + word + "\" at " + startIndex + " to " + endIndex);
+
         return upsetWord;
     }
 
@@ -137,18 +131,22 @@ public class CasigayPaulA2Q1 {
         String firstPart = word.substring(0, index);
         String secondPart = word.substring(index, word.length());
         // put a space in between first and second halves
-        String drawnOutWord = firstPart + " " + secondPart;
+        String punchedWord = firstPart + " " + secondPart;
 
-        return drawnOutWord;
+        System.out.println(" > Punching \"" + word + "\" at " + index);
+
+        return punchedWord;
     }
 
     // concatenates words together like welding metal
     static String weld(String firstWord, String secondWord) {
         String weldedWord = firstWord + secondWord;
+        System.out.println(" > Welding \"" + firstWord + "\" with \"" + secondWord + "\"");
+
         return weldedWord;
     }
 
-    // stamps an 'die' word into a word at the specified starting index
+    /// stamps an 'die' word into a word at the specified starting index
     static String stamp(String word, String die, int startIndex) {
         String firstPart = word.substring(0, startIndex);
         // stamp the die to the first part of the word
@@ -158,6 +156,8 @@ public class CasigayPaulA2Q1 {
         // get the rest after the stamped part and add it to the stamped word
         String secondPart = word.substring(stampedWord.length(), word.length());
         stampedWord += secondPart;
+
+        System.out.println(" > Stamping \"" + word + "\" with \"" + die + "\" at 2: ");
 
         return stampedWord;
     }

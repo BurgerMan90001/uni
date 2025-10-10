@@ -12,18 +12,23 @@
 import java.util.Scanner;
 
 public class CasigayPaulA2Q2 {
+
+    // static final double CITY_AREA = 4.123123;
     public static void main(String[] args) {
         // lowercase and capitalized letters for showing shrink and upset
         String word1 = "smithing";
         String word2 = "SMITHING";
         String die = "die";
-
+        Scanner scnr = new Scanner(System.in);
+        smithWord(word1, scnr);
         // testSuite(word1, word2, die);
 
         System.out.println("Program terminated successfully.");
     }
 
     static void testSuite(String word1, String word2, String die) {
+        Scanner scnr = new Scanner(System.in);
+
         // retrive the smithed words
         String drawnOutWord = drawOut(word1, 0);
         String shrunkWord = shrink(word2, 4, 7);
@@ -53,35 +58,30 @@ public class CasigayPaulA2Q2 {
         System.out.println(" > Stamping \"" + word1 + "\" with \"" + die + "\" at 2: ");
         printResult(stampedWord, "smhearng");
 
-        smithWord(word1, die);
+        smithWord(word1, scnr);
 
         System.out.println("----> TEST SUITE END");
     }
 
-    static void smithWord(String word, String die) {
+    static void smithWord(String word, Scanner scnr) {
         System.out.println(" ----> Smithing the word \"" + word + "\"");
-        String drawnOutWord = drawOut(word, 2);
-        System.out.println("-Drawing out \"" + word + "\" at 2");
+
+        String drawnOutWord = drawOut(word, scnr);
         printResult(drawnOutWord);
 
-        String shrunkWord = shrink(drawnOutWord, 4, 7);
-        System.out.println("-Shrinking \"" + drawnOutWord + "\" at 4 to 7");
+        String shrunkWord = shrink(drawnOutWord, scnr);
         printResult(shrunkWord);
 
-        String upsetWord = upset(shrunkWord, 4, 7);
-        System.out.println("-Upsetting \"" + shrunkWord + "\" at 4 to 7");
+        String upsetWord = upset(shrunkWord, scnr);
         printResult(upsetWord);
 
-        String weldedWord = weld(upsetWord, word);
-        System.out.println("-Welding \"" + upsetWord + "\" with \"" + word + "\"");
+        String weldedWord = weld(upsetWord, scnr);
         printResult(weldedWord);
 
-        String punchedWord = punch(weldedWord, 5);
-        System.out.println("-Punching \"" + word + "\" at 5");
+        String punchedWord = punch(weldedWord, scnr);
         printResult(punchedWord);
 
-        String stampedWord = stamp(punchedWord, die, 2);
-        System.out.println("-Stamping \"" + word + "\" at 2");
+        String stampedWord = stamp(punchedWord, scnr);
 
         System.out.println("Final result of smithWord: " + stampedWord);
     }
@@ -99,30 +99,31 @@ public class CasigayPaulA2Q2 {
 
     // duplicates a character in a word at the specified index
     static String drawOut(String word, int index) {
+
         char character = word.charAt(index);
 
         String firstPart = word.substring(0, index);
         String secondPart = word.substring(index, word.length());
         // put the indexed char and put in between first and second halves
         String drawnOutWord = firstPart + character + secondPart;
+
+        System.out.println(" > Drawing out \"" + word + "\" at " + index);
 
         return drawnOutWord;
     }
 
+    // overload method for user input
     static String drawOut(String word, Scanner scnr) {
+        System.out.print("Draw out at index: ");
         int index = scnr.nextInt();
-        char character = word.charAt(index);
 
-        String firstPart = word.substring(0, index);
-        String secondPart = word.substring(index, word.length());
-        // put the indexed char and put in between first and second halves
-        String drawnOutWord = firstPart + character + secondPart;
-
-        return drawnOutWord;
+        return drawOut(word, index);
     }
 
     // changes all letters in specified range to lowercase
     static String shrink(String word, int startIndex, int endIndex) {
+        System.out.println(" > Shrinking \"" + word + "\" at " + startIndex + " to " + endIndex);
+
         String firstPart = word.substring(0, startIndex);
         // get the specified range of the word and convert to lowercase
         String secondPart = word.substring(startIndex, endIndex).toLowerCase();
@@ -132,6 +133,17 @@ public class CasigayPaulA2Q2 {
         String shrinkedWord = firstPart + secondPart + thirdPart;
 
         return shrinkedWord;
+    }
+
+    // overload method for user input
+    static String shrink(String word, Scanner scnr) {
+        // get user input
+        System.out.print("Shrink start index: ");
+        int startIndex = scnr.nextInt();
+        System.out.print("Shink end index: ");
+        int endIndex = scnr.nextInt();
+
+        return shrink(word, startIndex, endIndex);
     }
 
     // changes all letters in specified range to uppercase
@@ -144,7 +156,19 @@ public class CasigayPaulA2Q2 {
 
         String upsetWord = firstPart + secondPart + thirdPart;
 
+        System.out.println(" > Upsetting \"" + word + "\" at " + startIndex + " to " + endIndex);
+
         return upsetWord;
+    }
+
+    // gets user input for start and end index
+    static String upset(String word, Scanner scnr) {
+        System.out.print("Upsetting start index: ");
+        int startIndex = scnr.nextInt();
+        System.out.print("Upsetting end index: ");
+        int endIndex = scnr.nextInt();
+
+        return upset(word, startIndex, endIndex);
     }
 
     // creates a space in a word at the specified index
@@ -152,15 +176,34 @@ public class CasigayPaulA2Q2 {
         String firstPart = word.substring(0, index);
         String secondPart = word.substring(index, word.length());
         // put a space in between first and second halves
-        String drawnOutWord = firstPart + " " + secondPart;
+        String punchedWord = firstPart + " " + secondPart;
 
-        return drawnOutWord;
+        System.out.println(" > Punching \"" + word + "\" at " + index);
+
+        return punchedWord;
+    }
+
+    static String punch(String word, Scanner scnr) {
+        System.out.print("Punch at index: ");
+        int index = scnr.nextInt();
+
+        return punch(word, index);
     }
 
     // concatenates words together like welding metal
     static String weld(String firstWord, String secondWord) {
         String weldedWord = firstWord + secondWord;
+        System.out.println(" > Welding \"" + firstWord + "\" with \"" + secondWord + "\"");
+
         return weldedWord;
+    }
+
+    // gets user input for the second word
+    static String weld(String firstWord, Scanner scnr) {
+        System.out.print("Enter a word to weld to \"" + firstWord + "\": ");
+        String secondWord = scnr.next();
+
+        return weld(firstWord, secondWord);
     }
 
     // stamps an 'die' word into a word at the specified starting index
@@ -174,6 +217,21 @@ public class CasigayPaulA2Q2 {
         String secondPart = word.substring(stampedWord.length(), word.length());
         stampedWord += secondPart;
 
+        System.out.println(" > Stamping \"" + word + "\" with \"" + die + "\" at 2: ");
+
         return stampedWord;
+    }
+
+    // gets user input for die and starting index. then stamps the word
+    static String stamp(String word, Scanner scnr) {
+        String temp = scnr.nextLine();
+
+        System.out.print("Enter a stamping die: ");
+        String die = scnr.nextLine();
+
+        System.out.print("Enter the stamping index: ");
+        int startIndex = scnr.nextInt();
+
+        return stamp(word, die, startIndex);
     }
 }
