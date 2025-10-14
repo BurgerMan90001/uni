@@ -1,3 +1,4 @@
+package A2;
 /*
 * COMP 1010 SECTION A02
 * INSTRUCTOR: Emanuel Wiens 
