@@ -3,7 +3,11 @@ import java.util.Scanner;
 class Test {
     public static void main(String[] args) {
         // test2();
-        test();
+        String test1 = "hello";
+        String ye = "o";
+        String test2 = "hell" + ye;
+
+        System.out.println(test1 == test2);
     }
 
     static void q4() {
