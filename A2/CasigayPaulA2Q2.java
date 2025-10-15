@@ -13,8 +13,6 @@ package A2;
 import java.util.Scanner;
 
 public class CasigayPaulA2Q2 {
-
-    // static final double CITY_AREA = 4.123123;
     public static void main(String[] args) {
         // lowercase and capitalized letters for showing shrink and upset
         String word1 = "smithing";
