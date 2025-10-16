@@ -41,7 +41,7 @@ public class CasigayPaulA2Q1 {
         printResult(punchedWord, "smith ing");
 
         // testing for index out of bounds crashes
-        String stampedWord = stamp(word1, die, 5);
+        String stampedWord = stamp(word1, die, 2);
         printResult(stampedWord, "smdieing");
 
         smithWord(word1, die);

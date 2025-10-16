@@ -5,7 +5,7 @@ package A2;
 * STUDENT NAME: Paul Casigay
 * STUDENT NUMBER: 8061457
 * ASSIGNMENT: 2
-* QUESTION: 1
+* QUESTION: 2
 *
 * PURPOSE: Performs smithing operations on words with techniques such as welding, stamping, punching, and shrinking.
 */
@@ -44,7 +44,7 @@ public class CasigayPaulA2Q2 {
         String punchedWord = punch(word1, 5);
         printResult(punchedWord, "smith ing");
 
-        String stampedWord = stamp(word1, die, 2);
+        String stampedWord = stamp(word1, die, 6);
         printResult(stampedWord, "smdieing");
 
         smithWord(word1, scnr);
