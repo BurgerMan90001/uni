@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Rock {
+public class RockPaperScissors {
     static final String ROCK = "Rock";
     static final String SCISSORS = "Scissors";
     static final String PAPER = "Paper";
@@ -57,13 +57,17 @@ public class Rock {
 
         String moveName = getMoveName(playerMove);
 
-        if (moveName.equals("Invalid move")) {
+        if (isMoveInvalid(moveName)) {
             System.out.println("Invalid move");
             playerMove(scnr);
         }
         System.out.println("> Player chooses: " + playerMove);
 
         return moveName;
+    }
+
+    static boolean isMoveInvalid(String moveName) {
+        return moveName.equals("Invalid move");
     }
 
     static String computerMove() {
