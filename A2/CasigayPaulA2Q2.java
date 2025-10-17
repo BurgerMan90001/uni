@@ -5,7 +5,7 @@ package A2;
 * STUDENT NAME: Paul Casigay
 * STUDENT NUMBER: 8061457
 * ASSIGNMENT: 2
-* QUESTION: 1
+* QUESTION: 2
 *
 * PURPOSE: Performs smithing operations on words with techniques such as welding, stamping, punching, and shrinking.
 */
@@ -27,35 +27,25 @@ public class CasigayPaulA2Q2 {
 
     static void testSuite(String word1, String word2, String die) {
         Scanner scnr = new Scanner(System.in);
-
-        // retrive the smithed words
-        String drawnOutWord = drawOut(word1, 0);
-        String shrunkWord = shrink(word2, 4, 7);
-        String upsetWord = upset(word1, 4, 7);
-        String weldedWord = weld(word1, word2);
-        String punchedWord = punch(word1, 5);
-        String stampedWord = stamp(word1, die, 2);
-
         System.out.println("----> TEST SUITE START");
 
-        System.out.println(" > Drawing out \"" + word1 + "\" at 1: ");
+        String drawnOutWord = drawOut(word1, 0);
         printResult(drawnOutWord, "ssmithing");
 
-        System.out.println(" > Shrinking \"" + word2 + "\" from 4 to 7: ");
+        String shrunkWord = shrink(word2, 4, 7);
         printResult(shrunkWord, "SMIThing");
 
-        System.out.println(" > Upsetting \"" + word1 + "\" from 4 to 7: ");
+        String upsetWord = upset(word1, 4, 7);
         printResult(upsetWord, "smitHINg");
 
-        System.out.println(" > Welding \"" + word1 + "\" and \"" + word2 + "\": ");
+        String weldedWord = weld(word1, word2);
         printResult(weldedWord, "smithingSMITHING");
 
-        System.out.println(" > Punching \"" + word1 + "\" at 5: ");
+        String punchedWord = punch(word1, 5);
         printResult(punchedWord, "smith ing");
 
-        // testing for index out of bounds crashes
-        System.out.println(" > Stamping \"" + word1 + "\" with \"" + die + "\" at 2: ");
-        printResult(stampedWord, "smhearng");
+        String stampedWord = stamp(word1, die, 6);
+        printResult(stampedWord, "smdieing");
 
         smithWord(word1, scnr);
 
@@ -216,7 +206,7 @@ public class CasigayPaulA2Q2 {
         String secondPart = word.substring(stampedWord.length(), word.length());
         stampedWord += secondPart;
 
-        System.out.println(" > Stamping \"" + word + "\" with \"" + die + "\" at 2: ");
+        System.out.println(" > Stamping \"" + word + "\" with \"" + die + "\" at " + startIndex + ": ");
 
         return stampedWord;
     }

@@ -42,7 +42,7 @@ public class CasigayPaulA2Q1 {
 
         // testing for index out of bounds crashes
         String stampedWord = stamp(word1, die, 2);
-        printResult(stampedWord, "smhearng");
+        printResult(stampedWord, "smdieing");
 
         smithWord(word1, die);
 
@@ -159,7 +159,7 @@ public class CasigayPaulA2Q1 {
         String secondPart = word.substring(stampedWord.length(), word.length());
         stampedWord += secondPart;
 
-        System.out.println(" > Stamping \"" + word + "\" with \"" + die + "\" at 2: ");
+        System.out.println(" > Stamping \"" + word + "\" with \"" + die + "\" at " + startIndex + ": ");
 
         return stampedWord;
     }
