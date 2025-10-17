@@ -3,10 +3,11 @@ import java.util.Scanner;
 class Test {
     public static void main(String[] args) {
         // test2();
-        for (int i = 0; i < 5; i++) {
-
+        for (int i = 2; i < 5; i++) {
+            System.out.println("asdasd");
         }
     }
+
     static void q4() {
         int test = 3 / (2 + 1) % 2;
         int test2 = 3 % 2 + 1 % 2;

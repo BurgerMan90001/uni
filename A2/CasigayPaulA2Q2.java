@@ -22,6 +22,8 @@ public class CasigayPaulA2Q2 {
         smithWord(word1, scnr);
         // testSuite(word1, word2, die);
 
+        scnr.close();
+
         System.out.println("Program terminated successfully.");
     }
 
