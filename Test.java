@@ -2,9 +2,27 @@ import java.util.Scanner;
 
 class Test {
     public static void main(String[] args) {
-        // test2();
-        for (int i = 2; i < 5; i++) {
-            System.out.println("asdasd");
+
+        // fib();
+        poop();
+    }
+
+    static void fib() {
+        int prev = 0;
+
+        int i = 1;
+        while (i < 100) {
+            System.out.print(i + " ");
+            i += prev;
+            prev = i;
+        }
+    }
+
+    static void poop() {
+        for (int i = 0; i < 10; i++) {
+            int num = (int) Math.pow(2, i);
+
+            System.out.print(num + " ");
         }
     }
 
