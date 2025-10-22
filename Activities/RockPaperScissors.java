@@ -20,11 +20,6 @@ public class RockPaperScissors {
         String gameState = getGameState(playerMove, computerMove);
 
         System.out.println(gameState);
-
-    }
-
-    static void testSuite() {
-
     }
 
     static String getGameState(String playerMove, String computerMove) {
@@ -63,7 +58,7 @@ public class RockPaperScissors {
             System.out.println("Invalid move");
             playerMove(scnr);
         }
-        System.out.println("> Player chooses: " + playerMove);
+        System.out.println("> Player chooses: " + moveName);
 
         return moveName;
     }
@@ -73,12 +68,16 @@ public class RockPaperScissors {
     }
 
     static String computerMove() {
-        int comuterMove = (int) (Math.random() * 2);
+        int comuterMove = randomMove();
         String moveName = getMoveName(comuterMove);
 
         System.out.println("> Computer chooses: " + moveName);
 
         return moveName;
+    }
+
+    static int randomMove() {
+        return (int) (Math.random() * 2);
     }
 
     static String getMoveName(int moveNumber) {

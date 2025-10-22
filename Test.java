@@ -3,8 +3,23 @@ import java.util.Scanner;
 class Test {
     public static void main(String[] args) {
 
-        // fib();
-        poop();
+        for (int i = 70; i >= 21; i -= 7) {
+            System.out.println(i);
+        }
+    }
+
+    static void doo() {
+        for (int i = 4; i <= 42; i += 2) {
+            System.out.println(i);
+        }
+    }
+
+    static void goop() {
+        Scanner scnr = new Scanner(System.in);
+        String word;
+        do {
+            word = scnr.next();
+        } while (word.charAt(0) != 'a');
     }
 
     static void fib() {
@@ -20,6 +35,7 @@ class Test {
 
     static void poop() {
         for (int i = 0; i < 10; i++) {
+
             int num = (int) Math.pow(2, i);
 
             System.out.print(num + " ");

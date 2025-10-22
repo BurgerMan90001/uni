@@ -18,26 +18,19 @@ public class CasigayPaulA3Q1 {
     public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
 
-        double wallPos = getwallPos();
-        double wallHeight = getWallHeight();
+        double wallHeight = getRandomNum(10, 100);
+        // double wallPos = getRandomNum(25, 125);
+        double wallPos = 50f;
 
-        // amount of attempts to shoot the cannon
-        int tries = 3;
-        // double angleDegrees = getAngleDegrees(scnr);
-        while (tries > 0) {
+        System.out.println("The wall has a height of " + wallHeight + "m and is " + wallPos + "m away.");
+        // startGame(scnr, wallPos, wallHeight);
+        shootCannon(scnr, wallPos, wallHeight);
 
-            tries--;
-        }
+        scnr.close();
     }
 
     static void testSuite() {
-        System.out.println(getWallHeight());
-        System.out.println(getWallHeight());
-        System.out.println(getWallHeight());
-        System.out.println(getWallHeight());
-        System.out.println(getWallHeight());
-        System.out.println(getWallHeight());
-        System.out.println(getWallHeight());
+
     }
 
     // gets user input for the cannon's angle in degrees
@@ -54,41 +47,58 @@ public class CasigayPaulA3Q1 {
         return velocity;
     }
 
-    static void shootCannon(double angleDegrees, double velocity, double wallPos, double wallHeight) {
+    static boolean isInvalidAngle(double angleDegrees) {
+        return (angleDegrees > 90) || (angleDegrees < 0);
+    }
 
+    static boolean shootCannon(double angleRadians, double velocity, double wallPos, double wallHeight) {
+        boolean wentOverWall = true;
+
+        double secondsTime = getTimeAtWallPos(velocity, angleRadians, wallPos);
+        System.out.println("Time in seconds: " + secondsTime);
+
+        double yPos = getYPos(velocity, angleRadians, secondsTime);
+        System.out.println("y position of ball: " + yPos);
+
+        return wentOverWall;
     }
 
     static void shootCannon(Scanner scnr, double wallPos, double wallHeight) {
-        double angleDegrees = getAngleDegrees(scnr);
-        double velocity = getVelocity(scnr);
-        shootCannon(angleDegrees, velocity, wallPos, wallHeight);
+        // amount of attempts to shoot the cannon
+        int tries = 3;
+
+        while (tries > 0) {
+            double angleDegrees = getAngleDegrees(scnr);
+            // check if angle is valid before calculating
+            if (isInvalidAngle(angleDegrees)) {
+                System.out.println("Invalid angle, -1 turn.");
+
+            } else {
+                double angleRadians = Math.toRadians(angleDegrees);
+                double velocity = getVelocity(scnr);
+
+                shootCannon(angleRadians, velocity, wallPos, wallHeight);
+            }
+            tries--;
+        }
+
     }
 
-    // gets a random height between 10 and 100 metres
-    static double getWallHeight() {
-        double wallHeight = (Math.random() * 100);
-        return wallHeight;
-    }
-
-    // gets a random position between 25 and 125 metres
-    static double getwallPos() {
-        double wallPos = (Math.random() * 100) + 25;
-        return wallPos;
-    }
-
-    static double getWallPos(double velocity, double angleRadians, double secondsTime) {
+    static double getShotPos(double velocity, double angleRadians, double secondsTime) {
         double xPos = velocity * Math.cos(angleRadians) * secondsTime;
         return xPos;
     }
 
-    static double getSecondsTime(double velocity, double angleRadians, double xPos) {
+    static double getTimeAtWallPos(double velocity, double angleRadians, double xPos) {
         double secondsTime = (xPos) / (Math.cos(angleRadians) * velocity);
         return secondsTime;
     }
 
     static double getYPos(double velocity, double angleRadians, double secondsTime) {
-        double temp = secondsTime - ((1 / 2) * GRAVITY_ACCELERATION * Math.pow(secondsTime, 2));
-        double yPos = velocity * Math.sin(angleRadians) * temp;
+        double temp = (0.5 * GRAVITY_ACCELERATION * Math.pow(secondsTime, 2));
+        double yPos = velocity * Math.sin(angleRadians) * secondsTime;
+
+        yPos -= temp;
         return yPos;
     }
 
@@ -97,13 +107,20 @@ public class CasigayPaulA3Q1 {
         return yMax;
     }
 
-    static void didHitWall() {
-        System.out.println("The ball went over the wall!");
+    static void wentOverWall(boolean wentOverWall) {
 
-        System.out.println("The ball did not reach the wall");
+        if (wentOverWall) {
+            System.out.println("The ball went over the wall!");
+        } else {
+            System.out.println("The ball did not reach the wall");
+        }
     }
 
     static double getRandomNum(int min, int max) {
-        return Math.random() * (max - min) + min;
+        return round(Math.random() * (max - min) + min);
+    }
+
+    static double round(double num) {
+        return Math.round(num * 100);
     }
 }
