@@ -1,3 +1,4 @@
+package Labs;
 /* COMP 1010 Lab 5 Level 2: Debugging with a Debugger
  * This program should ask the user to input numbers.  It should test whether each input
  * is a number, and keep a running total of the numbers input.  Once finished entering

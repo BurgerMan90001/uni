@@ -1,3 +1,4 @@
+package Labs;
 /* COMP 1010 Lab 5 Level 1: Debugging with a Debugger
  * This program should ask the user to input a string containing only letters
  * and spaces (no punctuation or other special characters). The input will be
