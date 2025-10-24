@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class CasigayPaulA3Q1 {
     // earth gravity is 9.8m/s^2
     static final double GRAVITY_ACCELERATION = 9.8;
+    static final int MAX_Y_THRESHOLD = 100000;
 
     public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
@@ -33,34 +34,30 @@ public class CasigayPaulA3Q1 {
 
     }
 
-    // gets user input for the cannon's angle in degrees
-    static double getAngleDegrees(Scanner scnr) {
-        System.out.print("Enter the cannon's angle in degrees: ");
-        double angleDegrees = scnr.nextDouble();
-        return angleDegrees;
-    }
+    static void shootCannon(double angleRadians, double velocity, double wallPos, double wallHeight) {
+        // boolean wentOverWall = true;
 
-    // gets user input for the cannon's velocity in m/s
-    static double getVelocity(Scanner scnr) {
-        System.out.print("Enter the cannon's velocity in m/s:");
-        double velocity = scnr.nextDouble();
-        return velocity;
-    }
-
-    static boolean isInvalidAngle(double angleDegrees) {
-        return (angleDegrees > 90) || (angleDegrees < 0);
-    }
-
-    static boolean shootCannon(double angleRadians, double velocity, double wallPos, double wallHeight) {
-        boolean wentOverWall = true;
-
-        double secondsTime = getTimeAtWallPos(velocity, angleRadians, wallPos);
+        double secondsTime = getTimeAtXPos(velocity, angleRadians, wallPos);
         System.out.println("Time in seconds: " + secondsTime);
 
         double yPos = getYPos(velocity, angleRadians, secondsTime);
+        double yMax = getYMax(velocity);
+
         System.out.println("y position of ball: " + yPos);
 
-        return wentOverWall;
+        if (yPos < 0) {
+            System.out.println("The ball did not reach the wall.");
+        } else if (yPos < wallHeight) {
+            System.out.println("The ball did not go over the wall!");
+        } else {
+            System.out.println("The ball went over the wall!");
+            // if the ball went outside the Earth's atmosphere (yMax<100km)
+            if (yMax < MAX_Y_THRESHOLD) {
+                System.out.println("The ball went over the max threshold.");
+            } else {
+                System.out.println("The ball stayed under the max threshold");
+            }
+        }
     }
 
     static void shootCannon(Scanner scnr, double wallPos, double wallHeight) {
@@ -68,28 +65,50 @@ public class CasigayPaulA3Q1 {
         int tries = 3;
 
         while (tries > 0) {
-            double angleDegrees = getAngleDegrees(scnr);
+            double angleDegrees = userAngleDegrees(scnr);
             // check if angle is valid before calculating
             if (isInvalidAngle(angleDegrees)) {
                 System.out.println("Invalid angle, -1 turn.");
-
             } else {
                 double angleRadians = Math.toRadians(angleDegrees);
-                double velocity = getVelocity(scnr);
+                double velocity = userVelocity(scnr);
 
                 shootCannon(angleRadians, velocity, wallPos, wallHeight);
             }
             tries--;
         }
+    }
+
+    static void printThreshold() {
 
     }
 
+    // gets user input for the cannon's angle in degrees
+    static double userAngleDegrees(Scanner scnr) {
+        System.out.print("Enter the cannon's angle in degrees: ");
+        double angleDegrees = scnr.nextDouble();
+        return angleDegrees;
+    }
+
+    // gets user input for the cannon's velocity in m/s
+    static double userVelocity(Scanner scnr) {
+        System.out.print("Enter the cannon's velocity in m/s: ");
+        double velocity = scnr.nextDouble();
+        return velocity;
+    }
+
+    // is true when an angle is outside the range of 0 to 90 degrees
+    static boolean isInvalidAngle(double angleDegrees) {
+        return (angleDegrees > 90) || (angleDegrees < 0);
+    }
+
+    // the x position of the ball at a specified point in time
     static double getShotPos(double velocity, double angleRadians, double secondsTime) {
         double xPos = velocity * Math.cos(angleRadians) * secondsTime;
         return xPos;
     }
 
-    static double getTimeAtWallPos(double velocity, double angleRadians, double xPos) {
+    static double getTimeAtXPos(double velocity, double angleRadians, double xPos) {
         double secondsTime = (xPos) / (Math.cos(angleRadians) * velocity);
         return secondsTime;
     }
@@ -112,7 +131,7 @@ public class CasigayPaulA3Q1 {
         if (wentOverWall) {
             System.out.println("The ball went over the wall!");
         } else {
-            System.out.println("The ball did not reach the wall");
+            System.out.println("The ball did not reach the wall.");
         }
     }
 
@@ -121,6 +140,6 @@ public class CasigayPaulA3Q1 {
     }
 
     static double round(double num) {
-        return Math.round(num * 100);
+        return Math.round(num * 100.0) / 100.0;
     }
 }
