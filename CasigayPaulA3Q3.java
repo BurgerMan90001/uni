@@ -14,6 +14,7 @@ public class CasigayPaulA3Q3 {
     public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
 
+        // The size of the grid
         int gridWidth = 25;
         int gridHeight = 30;
         //
@@ -21,6 +22,20 @@ public class CasigayPaulA3Q3 {
         final int MIDDLE_DIAMETER = 5;
         final int INNER_DIAMETER = 2;
 
+        scnr.close();
+    }
+
+    static void luckyShot(int xCoord, int yCoord) {
+
+    }
+
+    static void luckyShot(int xCoord, int yCoord, Scanner scnr) {
+
+    }
+
+    static boolean isWithinBounds() {
+        boolean isWithinBounds = true;
+        return isWithinBounds;
     }
 
     static void test() {
