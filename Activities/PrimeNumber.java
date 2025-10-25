@@ -12,13 +12,13 @@ public class PrimeNumber {
 
     static boolean isPrimeNumber(int num) {
         boolean isPrimeNumber = true;
-        if ((num % 2 == 0) && (2 != num)) {
+        if ((num % 2 == 0) && (num != 2)) {
             return false;
         }
-        for (int i = 3; i < 10; i += 2) {
+        for (int i = 3; i < num; i += 2) {
             if ((num % i == 0) && (i != num)) {
                 isPrimeNumber = false;
-                break;
+                // break;
             }
         }
         return isPrimeNumber;
