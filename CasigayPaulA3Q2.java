@@ -8,7 +8,7 @@ import java.util.Scanner;
 * ASSIGNMENT: 3
 * QUESTION: 2
 *
-* PURPOSE: Calculates the trajectory of a cannon based on user input. 
+* PURPOSE: Calculates the trajectory of a cannon based on user input on different planets. 
 */
 
 public class CasigayPaulA3Q2 {
