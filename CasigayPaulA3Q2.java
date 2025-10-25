@@ -6,12 +6,12 @@ import java.util.Scanner;
 * STUDENT NAME: Paul Casigay
 * STUDENT NUMBER: 8061457
 * ASSIGNMENT: 3
-* QUESTION: 1
+* QUESTION: 2
 *
 * PURPOSE: Calculates the trajectory of a cannon based on user input. 
 */
 
-public class CasigayPaulA3Q1 {
+public class CasigayPaulA3Q2 {
     // earth gravity is 9.8m/s^2
     static final double GRAVITY_ACCELERATION = 9.8;
     // 100km threshold for ball
