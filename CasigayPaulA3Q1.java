@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class CasigayPaulA3Q1 {
     // earth gravity is 9.8m/s^2
-    static final double GRAVITY_ACCELERATION = 9.8;
+    static final double GRAVITY = 9.8;
     // 100km threshold for ball
     static final int MAX_Y_THRESHOLD = 100000;
 
@@ -27,11 +27,12 @@ public class CasigayPaulA3Q1 {
         System.out.println(wallPos + "m away.");
 
         // Give the user 3 tries
-        // shootCannon(scnr, wallPos, wallHeight);
-        // shootCannon(scnr, wallPos, wallHeight);
-        // shootCannon(scnr, wallPos, wallHeight);
+        shootCannon(scnr, wallPos, wallHeight);
+        shootCannon(scnr, wallPos, wallHeight);
+        shootCannon(scnr, wallPos, wallHeight);
 
         testSuite();
+
         scnr.close();
     }
 
@@ -60,7 +61,7 @@ public class CasigayPaulA3Q1 {
         double yPos = getYPos(velocity, angleRadians, secondsTime);
         double yMax = getYMax(velocity, angleRadians);
 
-        printShotInfo(secondsTime, yPos, yMax);
+        printShotInfo(secondsTime, yPos);
 
         printResult(yPos, yMax, wallHeight);
     }
@@ -80,11 +81,10 @@ public class CasigayPaulA3Q1 {
     }
 
     // Prints the calculated shot's time, and height when it reaches the wall
-    static void printShotInfo(double secondsTime, double yPos, double yMax) {
+    static void printShotInfo(double secondsTime, double yPos) {
         System.out.println(" Shooting cannon -------");
         System.out.print("The ball reaches the wall at " + round(secondsTime) + " seconds");
         System.out.println(" and with a y position of " + round(yPos) + "m");
-        System.out.println("yMax of ball: " + round(yMax));
     }
 
     // Prints the result of shooting the cannon
@@ -124,7 +124,7 @@ public class CasigayPaulA3Q1 {
         return (angleDegrees > 90) || (angleDegrees < 0);
     }
 
-    // the x position of the ball at a specified point in time
+    // The x position of the ball at a specified point in time
     static double getXPos(double velocity, double angleRadians, double secondsTime) {
         double xPos = velocity * Math.cos(angleRadians) * secondsTime;
         return xPos;
@@ -136,16 +136,18 @@ public class CasigayPaulA3Q1 {
         return secondsTime;
     }
 
+    // The y position of the ball at a specified point in time
     static double getYPos(double velocity, double angleRadians, double secondsTime) {
-        double temp = (0.5 * GRAVITY_ACCELERATION * Math.pow(secondsTime, 2));
+        double temp = (0.5 * GRAVITY * Math.pow(secondsTime, 2));
         double yPos = velocity * Math.sin(angleRadians) * secondsTime;
 
         yPos -= temp;
         return yPos;
     }
 
+    // Gets the highest point that the ball will reach
     static double getYMax(double velocity, double angleRadians) {
-        double yMax = (velocity * Math.sin(angleRadians)) / (2 * GRAVITY_ACCELERATION);
+        double yMax = (velocity * Math.sin(angleRadians)) / (2 * GRAVITY);
         return yMax;
     }
 
