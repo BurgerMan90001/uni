@@ -1,3 +1,5 @@
+package A3;
+
 import java.util.Scanner;
 
 /*
@@ -6,64 +8,40 @@ import java.util.Scanner;
 * STUDENT NAME: Paul Casigay
 * STUDENT NUMBER: 8061457
 * ASSIGNMENT: 3
-* QUESTION: 2
+* QUESTION: 1
 *
-* PURPOSE: Calculates the trajectory of a cannon based on user input on different planets. 
+* PURPOSE: Calculates the trajectory of a cannon based on user input. 
 */
 
-public class CasigayPaulA3Q2 {
-    // Atmospheric height. Same for Earth and Mars
+public class CasigayPaulA3Q1 {
+    // earth gravity is 9.8m/s^2
+    static final double GRAVITY = 9.8;
+    // 100km threshold for ball
     static final int MAX_Y_THRESHOLD = 100000;
-    // Planet constants (metres for radius and kg for mass)
-    static final double MOON_MASS = 7.348e22;
-    static final double MOON_RADIUS = 1.738e6;
-
-    static final double EARTH_MASS = 5.972e24;
-    static final double EARTH_RADIUS = 6.371e6;
-
-    static final double MARS_MASS = 6.417e23;
-    static final double MARS_RADIUS = 3.390e6;
-
-    // Gravitational constant of the universe
-    static final double GRAV_CONST = 6.6743e-11;
-    // Global planetGravity and max y thershold for different varying planets
-    static double planetGravity = 0.0;
-    static int planetYTheshold = 0;
 
     public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
 
-        testSuite();
-
-        scnr.close();
-    }
-
-    static void test(Scanner scnr) {
         double wallHeight = getRandomNum(10, 100);
         double wallPos = getRandomNum(25, 125);
 
         System.out.print(" > The wall has a height of " + wallHeight + "m and is ");
         System.out.println(wallPos + "m away.");
 
-        String planet = userPlanet(scnr);
-        planetGravity = getGravity(planet);
-
-        System.out.println("Gravity is at " + planetGravity + " with atmospheric height of " + planetYTheshold);
-
         // Give the user 3 tries
         shootCannon(scnr, wallPos, wallHeight);
         shootCannon(scnr, wallPos, wallHeight);
         shootCannon(scnr, wallPos, wallHeight);
+
+        testSuite();
+
+        scnr.close();
     }
 
     static void testSuite() {
         System.out.println("____TEST SUITE____");
-
         double wallHeight = 50.0;
         double wallPos = 50.0;
-
-        // Test with mars planetGravity
-        planetGravity = getGravity("Mars");
 
         // Goes over the max threshold
         printExpected(0.00031, 2864.5, "go over the max threshold");
@@ -74,12 +52,13 @@ public class CasigayPaulA3Q2 {
         shootCannon(Math.toRadians(60), 1000, wallPos, wallHeight);
 
         // Hits the wall
-        printExpected(2.8, 35.08, "hit the wall");
+        printExpected(2.8, 10.85, "hit the wall");
         shootCannon(Math.toRadians(45), 25, wallPos, wallHeight);
 
         // Does not reach the wall
-        printExpected(14.14, -323, "not reach wall");
+        printExpected(14.14, -930, "not reach wall");
         shootCannon(Math.toRadians(45), 5, wallPos, wallHeight);
+
         System.out.println("____TEST SUITE END____");
     }
 
@@ -87,41 +66,11 @@ public class CasigayPaulA3Q2 {
         System.out.println(" > Expected to " + result + " at " + time + "s and at " + yPos + "m");
     }
 
-    // Sets the global planetGravity acceleration based on the planet
-    static double getGravity(String planet) {
-        double planetMass;
-        double planetRadius;
-        switch (planet) {
-            case "Mars":
-                planetMass = MARS_MASS;
-                planetRadius = MARS_RADIUS;
-                planetYTheshold = MAX_Y_THRESHOLD;
-                break;
-            case "Earth":
-                planetMass = EARTH_MASS;
-                planetRadius = EARTH_RADIUS;
-                planetYTheshold = MAX_Y_THRESHOLD;
-                break;
-            // Moon does not have an atmosphere
-            case "Moon":
-                planetMass = MOON_MASS;
-                planetRadius = MOON_RADIUS;
-                break;
-            default:
-                System.out.println("Defaulting to Earth's gravity");
-                planetMass = EARTH_MASS;
-                planetRadius = EARTH_RADIUS;
-                break;
-        }
-        planetGravity = GRAV_CONST * (planetMass / Math.pow(planetRadius, 2));
-        return round(planetGravity);
-    }
-
     static void shootCannon(double angleRadians, double velocity, double wallPos, double wallHeight) {
         // Calculate the shot's time and y position when it reaches the wall
         double secondsTime = getTimeAtXPos(velocity, angleRadians, wallPos);
-        double yPos = getYPos(velocity, angleRadians, secondsTime, planetGravity);
-        double yMax = getYMax(velocity, angleRadians, planetGravity);
+        double yPos = getYPos(velocity, angleRadians, secondsTime);
+        double yMax = getYMax(velocity, angleRadians);
 
         printShotInfo(secondsTime, yPos);
 
@@ -131,7 +80,6 @@ public class CasigayPaulA3Q2 {
     // helper method to get user input for angle and velocity
     static void shootCannon(Scanner scnr, double wallPos, double wallHeight) {
         double angleDegrees = userAngleDegrees(scnr);
-
         // check if angle is valid before calculating
         if (isInvalidAngle(angleDegrees)) {
             System.out.println("Invalid angle, -1 turn.");
@@ -158,24 +106,14 @@ public class CasigayPaulA3Q2 {
             System.out.println("The ball did not go over the wall!");
         } else {
             System.out.println("The ball went over the wall!");
-            if (planetYTheshold == 0) {
-                System.out.println("Since is no atmosphere, there is no max y threshold");
-            }
             // if the ball went outside the Earth's atmosphere (yMax<100km)
-            else if (yMax > planetYTheshold) {
+            if (yMax > MAX_Y_THRESHOLD) {
                 System.out.println("The ball went over the max threshold!");
             } else {
                 System.out.println("The ball stayed under the max threshold.");
             }
         }
         System.out.println("");
-    }
-
-    // Get user input for planet and return the acceleration due to planetGravity.
-    static String userPlanet(Scanner scnr) {
-        System.out.print("Choose a planet to be on (Earth, Moon, Mars): ");
-        String planet = scnr.next();
-        return planet;
     }
 
     // gets user input for the cannon's angle in degrees
@@ -204,8 +142,8 @@ public class CasigayPaulA3Q2 {
     }
 
     // The y position of the ball at a specified point in time
-    static double getYPos(double velocity, double angleRadians, double secondsTime, double planetGravity) {
-        double temp = (0.5 * planetGravity * Math.pow(secondsTime, 2));
+    static double getYPos(double velocity, double angleRadians, double secondsTime) {
+        double temp = (0.5 * GRAVITY * Math.pow(secondsTime, 2));
         double yPos = velocity * Math.sin(angleRadians) * secondsTime;
 
         yPos -= temp;
@@ -213,8 +151,8 @@ public class CasigayPaulA3Q2 {
     }
 
     // Gets the highest point that the ball will reach
-    static double getYMax(double velocity, double angleRadians, double planetGravity) {
-        double yMax = (velocity * Math.sin(angleRadians)) / (2 * planetGravity);
+    static double getYMax(double velocity, double angleRadians) {
+        double yMax = (velocity * Math.sin(angleRadians)) / (2 * GRAVITY);
         return yMax;
     }
 

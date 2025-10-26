@@ -1,3 +1,5 @@
+package A3;
+
 import java.util.Scanner;
 /*
 * COMP 1010 SECTION A02
