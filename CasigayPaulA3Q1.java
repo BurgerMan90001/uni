@@ -37,22 +37,31 @@ public class CasigayPaulA3Q1 {
     }
 
     static void testSuite() {
+        System.out.println("____TEST SUITE____");
         double wallHeight = 50.0;
         double wallPos = 50.0;
 
-        final double RADIANS_45 = Math.toRadians(45);
-
         // Goes over the max threshold
+        printExpected(0.00031, 2864.5, "go over the max threshold");
         shootCannon(Math.toRadians(89), 9000000, wallPos, wallHeight);
 
         // Goes over the wall
+        printExpected(0.1, 86.554, "go over the wall");
         shootCannon(Math.toRadians(60), 1000, wallPos, wallHeight);
 
         // Hits the wall
-        shootCannon(RADIANS_45, 25, wallPos, wallHeight);
+        printExpected(2.8, 10.85, "hit the wall");
+        shootCannon(Math.toRadians(45), 25, wallPos, wallHeight);
 
         // Does not reach the wall
-        shootCannon(RADIANS_45, 5, wallPos, wallHeight);
+        printExpected(14.14, -930, "not reach wall");
+        shootCannon(Math.toRadians(45), 5, wallPos, wallHeight);
+
+        System.out.println("____TEST SUITE END____");
+    }
+
+    static void printExpected(double time, double yPos, String result) {
+        System.out.println(" > Expected to " + result + " at " + time + "s and at " + yPos + "m");
     }
 
     static void shootCannon(double angleRadians, double velocity, double wallPos, double wallHeight) {
@@ -83,7 +92,7 @@ public class CasigayPaulA3Q1 {
     // Prints the calculated shot's time, and height when it reaches the wall
     static void printShotInfo(double secondsTime, double yPos) {
         System.out.println(" Shooting cannon -------");
-        System.out.print("The ball reaches the wall at " + round(secondsTime) + " seconds");
+        System.out.print("The ball will reach the wall at " + round(secondsTime) + " seconds");
         System.out.println(" and with a y position of " + round(yPos) + "m");
     }
 
@@ -121,13 +130,7 @@ public class CasigayPaulA3Q1 {
 
     // is true when an angle is outside the range of 0 to 90 degrees
     static boolean isInvalidAngle(double angleDegrees) {
-        return (angleDegrees > 90) || (angleDegrees < 0);
-    }
-
-    // The x position of the ball at a specified point in time
-    static double getXPos(double velocity, double angleRadians, double secondsTime) {
-        double xPos = velocity * Math.cos(angleRadians) * secondsTime;
-        return xPos;
+        return (angleDegrees >= 90) || (angleDegrees <= 0);
     }
 
     // Gets the time in seconds at the specified x position

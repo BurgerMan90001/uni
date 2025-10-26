@@ -55,14 +55,27 @@ public class CasigayPaulA3Q3 {
         int targetY = 10;
 
         // Out of bounds
-        luckyShot(10000, 10000, targetX, targetY);
+        printExpected("Went outside of the game grid");
+        testShot(10000, 10000, targetX, targetY);
         // Outer ring
-        luckyShot(15, 15, targetX, targetY);
+        printExpected("Hit outer ring");
+        testShot(15, 15, targetX, targetY);
         // Middle ring
-        luckyShot(12, 12, targetX, targetY);
+        printExpected("Hit middle ring");
+        testShot(12, 12, targetX, targetY);
         // Inner ring
-        luckyShot(10, 10, targetX, targetY);
-        System.out.println("____TEST SUITE END____");
+        printExpected("Hit inner ring");
+        testShot(10, 10, targetX, targetY);
+    }
+
+    // Testing method
+    static void testShot(int shotX, int shotY, int targetX, int targetY) {
+        System.out.print("Shot at (" + shotX + ", " + shotY + "): ");
+        luckyShot(shotX, shotY, targetX, targetY);
+    }
+
+    static void printExpected(String expected) {
+        System.out.println(" > Expected: " + expected);
     }
 
     static int luckyShot(int shotX, int shotY, int targetX, int targetY) {
