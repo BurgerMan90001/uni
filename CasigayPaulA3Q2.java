@@ -50,12 +50,14 @@ public class CasigayPaulA3Q2 {
         shootCannon(scnr, wallPos, wallHeight);
         shootCannon(scnr, wallPos, wallHeight);
 
-        // testSuite();
+        testSuite();
 
         scnr.close();
     }
 
     static void testSuite() {
+        System.out.println("____TEST SUITE____");
+
         double wallHeight = 50.0;
         double wallPos = 50.0;
 
@@ -85,6 +87,7 @@ public class CasigayPaulA3Q2 {
                 planetMass = MARS_MASS;
                 planetRadius = MARS_RADIUS;
                 planetYTheshold = MAX_Y_THRESHOLD;
+                break;
             case "Earth":
                 planetMass = EARTH_MASS;
                 planetRadius = EARTH_RADIUS;
@@ -96,7 +99,7 @@ public class CasigayPaulA3Q2 {
                 planetRadius = MOON_RADIUS;
                 break;
             default:
-                System.out.println("Defaulting to earth planetGravity");
+                System.out.println("Defaulting to Earth's gravity");
                 planetMass = EARTH_MASS;
                 planetRadius = EARTH_RADIUS;
                 break;
