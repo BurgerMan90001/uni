@@ -1,3 +1,5 @@
+package Labs;
+
 public class Lab6 {
     public static void main(String[] args) {
         int width = 2;
