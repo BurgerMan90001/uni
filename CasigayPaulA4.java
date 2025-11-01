@@ -1,3 +1,5 @@
+import java.util.Random;
+import java.util.Scanner;
 
 /*
 * COMP 1010 SECTION A02
@@ -9,19 +11,257 @@
 *
 * PURPOSE: 
 */
-
 public class CasigayPaulA4 {
+    // Color constants for text formatting (use as recommended below for students)
+    // These constants represent ANSI color codes to apply text color in console
+    // output
+    // Example: System.out.println(GREEN + "Hello World" + RESET)
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+
+    // Word bank for the game (Should be ignored by students.)
+    // A set of predefined 5-letter words used as the secret words in each game
+    // round
+    public static final String[] WORDS = {
+            "Apple", "Bread", "Crane", "Dance", "Earth",
+            "Flute", "Grape", "House", "Plant", "Jelly",
+            "Knife", "Lemon", "Mango", "Nurse", "Ocean",
+            "Peach", "Queen", "Radar", "Stone", "Tiger",
+            "Urban", "Vivid", "Whale", "Xylog", "Yacht",
+            "Zebra", "Aloha", "Blaze", "Charm", "Dream"
+    };
+
+    /***
+     * Comments here
+     ***/
+    // main Function
     public static void main(String[] args) {
+        System.out.println(PURPLE + "****** Welcome to Activate Winnipeg of Dimension W110111010 ******" + RESET);
+        Scanner scan = new Scanner(System.in); // For capturing user input
+        Random rand = new Random(); // Random number generator
+        int aBucks = 0; // Player's A-Bucks balance
 
+        printMenu(aBucks); // Print the initial menu
+
+        // TODO: complete main method
     }
 
-    static void foop(int i) {
-        for (int o = 0; o < 9; i++) {
+    // Utility Functions *********************************
 
+    /**
+     * Displays the game menu with the current A-Bucks balance and available
+     * options.
+     * Input:
+     * - int aBucks: The current amount of A-Bucks the player has.
+     **/
+    static void printMenu(int aBucks) {
+        System.out.printf(CYAN + """
+                Current A-Bucks: %d
+                1. Safecracker
+                2. Duel with Waldo
+                3. Sharpshooter
+                4. Hall of Prime Mirrors
+                5. Wordle
+                or "Exit" to Exit. \n
+                """ + RESET, aBucks);
+    }
+
+    /***
+     * Comments here
+     ***/
+    // isDigitsOnly Function
+    // Is true if string only contains digits
+    static boolean isDigitsOnly(String string) {
+        boolean isDigitsOnly = true;
+        for (int i = 0; i < string.length(); i++) {
+            // isDigitsOnly is true until there is non digit in the string
+            if (!Character.isDigit(string.charAt(i))) {
+                isDigitsOnly = false;
+            }
         }
+        return isDigitsOnly;
     }
 
-    static void testSuite() {
+    /***
+     * Comments here
+     ***/
+    // difference Function
+    // Returns the absolute difference between two integers
+    static int difference(int numOne, int numTwo) {
+        return Math.abs(numOne - numTwo);
+    }
+
+    /***
+     * Comments here
+     ***/
+    // reverseTheNumber Function
+    static int reverseTheNumber(int num) {
+        String numString = Integer.toString(num);
+        String reversedNumString = "";
+        for (int i = numString.length() - 1; i >= 0; i--) {
+            reversedNumString += numString.charAt(i);
+        }
+        int reversedNum = Integer.parseInt(reversedNumString);
+
+        return reversedNum;
+    }
+
+    /***
+     * Comments here
+     ***/
+    // isPrimeMirror Function
+    // TODO: Implement the function.
+    static boolean isPrimeMirror(int num) {
+        return true;
+    }
+
+    /***
+     * Comments here
+     ***/
+    // printWordleGuess Function
+    // TODO: Implement the function.
+    static void printWordleGuess() {
 
     }
+
+    /***
+     * Comments here
+     ***/
+    // getSuccessRate Function
+    // TODO: Implement the function.
+    static void getSuccessRate() {
+
+    }
+
+    /***
+     * Comments here
+     ***/
+    // shootBasketball Function
+    // TODO: Implement the function.
+    static void shootBasketball() {
+
+    }
+    // Game Functions *********************************
+
+    /***
+     * Comments here
+     ***/
+    static int safecracker(Scanner scan, Random random) {
+        // Initialize a random number between [0, 10000) to be the safe combination
+        int combination = random.nextInt(0, 10000);
+
+        // Display game instructions and welcome message
+        System.out.println(YELLOW + """
+                \n ----- Welcome to the Safecracker ----- \n
+                -> You are presented with a safe that has 5000 A-Bucks in it.\n
+                -> The combination to the safe is a 4 digit number made from the digits 0-9.\n
+                -> You have 15 guesses until the alarm goes off and you lose the game.\n
+                -> Each time, you will be hinted if the number you guessed is more than the code or less than it.\n
+                -> If you finish in less than 15 trials you will get 100 A-bucks for each trial remaining! GOOD LUCK!
+                         """ + RESET);
+
+        // TODO: Implement the rest of the function.
+
+    }
+
+    /***
+     * Comments here
+     ***/
+    static int waldoDuel(Scanner scan, Random rand) {
+        // Display game introduction and rules
+        System.out.println(
+                YELLOW + """
+                        \n ----- Welcome to the Duel with Waldo game ----- \n
+                        -> You are playing against \"Waldo the Number Guy\". Waldo is very good with numbers, at least that's what everyone says!\n
+                        -> On each round of this game a predetermined number between [1, 100] inclusive is generated by the computer.
+                        -> You and Waldo each guess a number.
+                        -> Whomever's number is closer to the predetermined target number, wins the game.
+                        -> You can play this game as many times as you want and to quit the game you may enter \'q\'
+                        -> Each time you win, you will gain 100 A-Bucks! GOOD LUCK!
+                        """
+                        + RESET);
+
+        // TODO: Implement the rest of the function.
+
+    }
+
+    /***
+     * Comments here
+     ***/
+    static int sharpshooter(Scanner scan, Random rand) {
+        System.out.println(
+                YELLOW + """
+                        \n ----- Welcome to the SharpShooter game ----- \n
+                        -> In this game, you and your teammate will play a game of shooting 3-pointers in a basketball game.
+                        -> You have five shots to score as many successful baskets as possible.
+                        -> You have the option to either take the shot yourself or pass it to your teammate.
+                        -> Each shot has a random success rate between 10% and 100%, which will be displayed before you decide.
+                        -> Choose to either shoot (based on the success probability) or pass the ball.
+                        -> If you pass, there is a 60% chance your teammate has a lower success rate and a 40% they have a better change.
+                        -> For every successful shot, you earn 50 A-Bucks.
+                                 """
+                        + RESET);
+
+        // TODO: Implement the rest of the function.
+
+    }
+
+    /***
+     * Comments here
+     ***/
+    static int primeMirrors(Scanner scan) {
+        // Display game introduction and rules
+        System.out.println(YELLOW + """
+                \n ----- Welcome to the Hall of Prime Mirrors Game ----- \n
+                -> In this challenge, you'll find numbers that are prime and whose reverse is also a prime.
+                -> You will get unlimited guesses and for each correct guess, you will gain 300 A-Bucks.
+                    """ + RESET);
+
+        // TODO: Implement the rest of the function.
+
+    }
+
+    /***
+     * Comments here
+     ***/
+    // wordle Function
+    static int wordle(Scanner scan, Random rand) {
+        // ***********************************************************************************************
+        // */
+        // Select a random target word from the WORDS array and convert it to uppercase
+        // *****************
+        String word = WORDS[rand.nextInt(0, 30)]; // DO NOT CHANGE *****************
+        word = word.toUpperCase(); // DO NOT CHANGE *****************
+        // ***********************************************************************************************
+        // */
+
+        // Display game introduction and rules
+        System.out.println(
+                YELLOW + """
+                        \n ----- Welcome to the Wordle Game ----- \n
+                        -> You are given 6 chances to guess a 5-letter word.\n
+                        -> After each guess, you'll receive feedback indicating:
+                            - Correct Letter and Position: If a letter is in the right position, it will be highlighted with GREEN.
+                            - Correct Letter, Wrong Position: If a letter is in the word but in the wrong position, it will be marked with YELLOW.
+                            - Incorrect Letter: Letters that aren't in the word at all will be marked in RED.
+                        -> If you guess the entire word correctly within 6 attempts, you earn 2500-A-Bucks.
+                            """
+                        + RESET);
+
+        // TODO: Implement the rest of the function.
+
+        // Display game introduction and rules
+
+        // Set the number of allowed trials
+
+        // Loop until user guesses correctly or runs out of trials
+    }
+
+    // End Wordle
+
 }
