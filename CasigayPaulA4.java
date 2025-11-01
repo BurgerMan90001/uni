@@ -72,10 +72,9 @@ public class CasigayPaulA4 {
     }
 
     /***
-     * Comments here
+     * Is true if string only contains digits
      ***/
     // isDigitsOnly Function
-    // Is true if string only contains digits
     static boolean isDigitsOnly(String string) {
         boolean isDigitsOnly = true;
         for (int i = 0; i < string.length(); i++) {
@@ -88,10 +87,9 @@ public class CasigayPaulA4 {
     }
 
     /***
-     * Comments here
+     * Returns the absolute difference between two integers
      ***/
     // difference Function
-    // Returns the absolute difference between two integers
     static int difference(int numOne, int numTwo) {
         return Math.abs(numOne - numTwo);
     }
@@ -111,13 +109,29 @@ public class CasigayPaulA4 {
         return reversedNum;
     }
 
+    static boolean isPrimeNumber(int num) {
+        boolean isPrimeNumber = true;
+        if ((num % 2 == 0) && (num != 2)) {
+            isPrimeNumber = false;
+        } else {
+            for (int i = 3; i < num; i += 2) {
+                if ((num % i == 0) && (i != num)) {
+                    isPrimeNumber = false;
+                }
+            }
+        }
+        return isPrimeNumber;
+    }
+
     /***
-     * Comments here
+     * Only true when both the number and its reverse are prime numbers
      ***/
     // isPrimeMirror Function
-    // TODO: Implement the function.
     static boolean isPrimeMirror(int num) {
-        return true;
+        // Get the reversed number
+        int reversedNum = reverseTheNumber(num);
+        boolean isPrimeMirror = isPrimeNumber(num) && isPrimeNumber(reversedNum);
+        return isPrimeMirror;
     }
 
     /***

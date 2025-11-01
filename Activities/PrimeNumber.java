@@ -18,7 +18,6 @@ public class PrimeNumber {
         for (int i = 3; i < num; i += 2) {
             if ((num % i == 0) && (i != num)) {
                 isPrimeNumber = false;
-                // break;
             }
         }
         return isPrimeNumber;
