@@ -35,12 +35,6 @@ public class CasigayPaulA3Q2 {
     public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
 
-        testSuite();
-
-        scnr.close();
-    }
-
-    static void test(Scanner scnr) {
         double wallHeight = getRandomNum(10, 100);
         double wallPos = getRandomNum(25, 125);
 
@@ -56,6 +50,10 @@ public class CasigayPaulA3Q2 {
         shootCannon(scnr, wallPos, wallHeight);
         shootCannon(scnr, wallPos, wallHeight);
         shootCannon(scnr, wallPos, wallHeight);
+
+        testSuite();
+
+        scnr.close();
     }
 
     static void testSuite() {

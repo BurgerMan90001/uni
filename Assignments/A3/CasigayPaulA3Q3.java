@@ -20,26 +20,13 @@ public class CasigayPaulA3Q3 {
     static final int OUTER_DIAMETER = 8;
     static final int MIDDLE_DIAMETER = 5;
     static final int INNER_DIAMETER = 2;
-    // Radius of outer ring
-    static final int OUTER_RADIUS = OUTER_DIAMETER / 2;
 
     public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
 
-        startGame(scnr);
-
-        testSuite();
-
-        scnr.close();
-    }
-
-    static void startGame(Scanner scnr) {
-        // Maximum x and y coordinates for placing target
-        int maxYTarget = GRID_WIDTH - OUTER_RADIUS;
-        int maxXTarget = GRID_HEIGHT - OUTER_RADIUS;
         // Generate random coordinates for target within the grid
-        int targetX = getRandomNum(OUTER_RADIUS, maxXTarget);
-        int targetY = getRandomNum(OUTER_RADIUS, maxYTarget);
+        int targetX = getRandomNum(0, GRID_WIDTH);
+        int targetY = getRandomNum(0, GRID_HEIGHT);
 
         int score1 = luckyShot(targetX, targetY, scnr);
         int score2 = luckyShot(targetX, targetY, scnr);
@@ -49,6 +36,10 @@ public class CasigayPaulA3Q3 {
 
         System.out.println("Target coordinates: (" + targetX + ", " + targetY + ")");
         System.out.println(" > Score total: " + scoreTotal);
+
+        testSuite();
+
+        scnr.close();
     }
 
     static void testSuite() {

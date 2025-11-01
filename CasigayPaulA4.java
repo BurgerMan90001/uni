@@ -15,6 +15,12 @@ public class CasigayPaulA4 {
 
     }
 
+    static void foop(int i) {
+        for (int o = 0; o < 9; i++) {
+
+        }
+    }
+
     static void testSuite() {
 
     }
