@@ -51,6 +51,9 @@ public class CasigayPaulA4 {
         printWordleGuess("goopa",
                 "goopa");
         // TODO: complete main method
+        System.out.println(safecracker(scan, rand));
+        // System.out.println(getSuccessRate(0.3, false));
+        // System.out.println(shootBasketball(0.2));
     }
 
     // Utility Functions *********************************
@@ -97,7 +100,7 @@ public class CasigayPaulA4 {
     }
 
     /***
-     * Comments here
+     * Reverses an integer
      ***/
     // reverseTheNumber Function
     static int reverseTheNumber(int num) {
@@ -109,6 +112,17 @@ public class CasigayPaulA4 {
         int reversedNum = Integer.parseInt(reversedNumString);
 
         return reversedNum;
+    }
+
+    /***
+     * Only true when both the number and its reverse are prime numbers
+     ***/
+    // isPrimeMirror Function
+    static boolean isPrimeMirror(int num) {
+        // Get the reversed number
+        int reversedNum = reverseTheNumber(num);
+        boolean isPrimeMirror = isPrimeNumber(num) && isPrimeNumber(reversedNum);
+        return isPrimeMirror;
     }
 
     static boolean isPrimeNumber(int num) {
@@ -126,21 +140,13 @@ public class CasigayPaulA4 {
     }
 
     /***
-     * Only true when both the number and its reverse are prime numbers
-     ***/
-    // isPrimeMirror Function
-    static boolean isPrimeMirror(int num) {
-        // Get the reversed number
-        int reversedNum = reverseTheNumber(num);
-        boolean isPrimeMirror = isPrimeNumber(num) && isPrimeNumber(reversedNum);
-        return isPrimeMirror;
-    }
-
-    /***
-     * 
+     * Prints the resulting wordle guess from a word and its guess
+     * A green letter is correct and matches the word's letter.
+     * A yellow letter means that the word contains the letter but is at the wrong
+     * position.
+     * Otherwise it's incorrect.
      ***/
     // printWordleGuess Function
-    // TODO: Implement the function.
     static void printWordleGuess(String word, String guess) {
         String wordleString = "";
         String missingCharacters = getMissingCharacters(word, guess);
@@ -163,33 +169,58 @@ public class CasigayPaulA4 {
     }
 
     static String getMissingCharacters(String word, String guess) {
-        String wrongCharacters = "";
+        String missingCharacters = "";
         // Find all wrong characters from the guess
         for (int j = 0; j < word.length(); j++) {
             // If a guess' char is found amount the missing chars
             if (word.charAt(j) != guess.charAt(j)) {
-                wrongCharacters += word.charAt(j);
+                missingCharacters += word.charAt(j);
             }
         }
-        return wrongCharacters;
+        return missingCharacters;
     }
 
     /***
-     * Comments here
+     * Returns the success rate of a teammate.
+     * Gives a random success rate that is higher or lower than the initialRate
      ***/
     // getSuccessRate Function
-    // TODO: Implement the function.
-    static void getSuccessRate() {
+    static double getSuccessRate(double initialRate, boolean shouldBeHigher) {
+        double successRate = 0.0;
+        double randomRate = 0.0;
 
+        boolean validHigherRate = false;
+        boolean validLowerRate = false;
+        // Loop while there is no valid higher and lower rate
+        while (!validHigherRate && !validLowerRate) {
+            randomRate = getRandomNum(0.10, 1.0);
+
+            validHigherRate = shouldBeHigher && randomRate > initialRate;
+            validLowerRate = !shouldBeHigher && randomRate < initialRate;
+
+            if (validHigherRate || validLowerRate) {
+                successRate = randomRate;
+            }
+        }
+        return successRate;
+    }
+
+    static double getRandomNum(double min, double max) {
+        return (Math.random() * (max - min)) + min;
     }
 
     /***
-     * Comments here
+     * Returns 50 A-Bucks if
      ***/
     // shootBasketball Function
-    // TODO: Implement the function.
-    static void shootBasketball() {
-
+    static int shootBasketball(double successRate) {
+        int aBucksWon = 0;
+        double shotChance = Math.random();
+        // If the shot goes in
+        if (successRate > shotChance) {
+            aBucksWon = 50;
+        }
+        return aBucksWon;
     }
     // Game Functions *********************************
 
@@ -197,9 +228,19 @@ public class CasigayPaulA4 {
      * Comments here
      ***/
     static int safecracker(Scanner scan, Random random) {
+        // abucks per remaining attempt
+        final int ABUCKS_PER_ATTEMPT = 100;
+        final int WIN_REWARD = 5000;
+
+        int attempts = 15;
+        int aBucksWon = 0;
+
+        boolean safeOpened = false;
+
         // Initialize a random number between [0, 10000) to be the safe combination
         int combination = random.nextInt(0, 10000);
-
+        combination = 321;
+        System.out.println(combination);
         // Display game instructions and welcome message
         System.out.println(YELLOW + """
                 \n ----- Welcome to the Safecracker ----- \n
@@ -210,8 +251,42 @@ public class CasigayPaulA4 {
                 -> If you finish in less than 15 trials you will get 100 A-bucks for each trial remaining! GOOD LUCK!
                          """ + RESET);
 
-        // TODO: Implement the rest of the function.
-        return 0;
+        while (attempts > 0 && !safeOpened) {
+            System.out.print("Enter combination guess (attempts " + attempts + "): ");
+            String guessString = scan.next();
+            // If the input is not a digit.
+            if (!isDigitsOnly(guessString)) {
+                System.out.println("Guess is not a number, try again.");
+            } else {
+                int guess = Integer.parseInt(guessString);
+                // Guess is out of range
+                if (guess < 0 || guess > 10000) {
+                    System.out.println("Guess is out of range, try again.");
+                }
+                // Valid input but wrong
+                else if (guess != combination) {
+                    if (guess > combination) {
+                        System.out.printf("%04d is higher than the combination.", guess);
+                    } else {
+                        System.out.printf("%04d is lower than the combination.", guess);
+                    }
+                }
+                // Guess is corect combination
+                else {
+                    safeOpened = true;
+                }
+            }
+            attempts--;
+        }
+        if (safeOpened) {
+            aBucksWon += attempts * ABUCKS_PER_ATTEMPT;
+            aBucksWon += WIN_REWARD;
+            System.out.println("WIN +" + aBucksWon + " aBucks won");
+        } else {
+            System.out.println("LOOSE. did not win within 15 attempts +0 aBucks won");
+        }
+
+        return aBucksWon;
     }
 
     /***
