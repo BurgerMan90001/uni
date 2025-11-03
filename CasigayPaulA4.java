@@ -239,8 +239,6 @@ public class CasigayPaulA4 {
 
         // Initialize a random number between [0, 10000) to be the safe combination
         int combination = random.nextInt(0, 10000);
-        combination = 321;
-        System.out.println(combination);
         // Display game instructions and welcome message
         System.out.println(YELLOW + """
                 \n ----- Welcome to the Safecracker ----- \n
