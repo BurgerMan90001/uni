@@ -210,7 +210,7 @@ public class CasigayPaulA4 {
     }
 
     /***
-     * Returns 50 A-Bucks if
+     * Returns 50 A-Bucks if the
      ***/
     // shootBasketball Function
     static int shootBasketball(double successRate) {
@@ -252,7 +252,7 @@ public class CasigayPaulA4 {
         while (attempts > 0 && !safeOpened) {
             System.out.print("Enter combination guess (attempts " + attempts + "): ");
             String guessString = scan.next();
-            // If the input is not a digit.
+            // If the input is not a number.
             if (!isDigitsOnly(guessString)) {
                 System.out.println("Guess is not a number, try again.");
             } else {
