@@ -48,7 +48,8 @@ public class CasigayPaulA4 {
 
         printMenu(aBucks); // Print the initial menu
 
-        printWordleGuess("goopa", "goopa");
+        printWordleGuess("goopa",
+                "goopa");
         // TODO: complete main method
     }
 
@@ -142,24 +143,35 @@ public class CasigayPaulA4 {
     // TODO: Implement the function.
     static void printWordleGuess(String word, String guess) {
         String wordleString = "";
-        String missing = "";
+        String missingCharacters = getMissingCharacters(word, guess);
         for (int i = 0; i < word.length(); i++) {
             char guessChar = guess.charAt(i);
-            int missingCharIndex = missing.indexOf(guessChar);
+            int missingCharIndex = missingCharacters.indexOf(guessChar);
 
             if (word.charAt(i) == guess.charAt(i)) {
                 wordleString += GREEN + guess.charAt(i) + RESET;
             }
-            // If a guess' char is found amount the missing chars
+            // If there is a missing character found
             else if (missingCharIndex != -1) {
                 wordleString += YELLOW + guess.charAt(i) + RESET;
-                missing += word.charAt(i);
             } else {
-                wordleString += guess.charAt(i);
-                missing += word.charAt(i);
+                wordleString += guessChar;
             }
         }
+
         System.out.println(wordleString);
+    }
+
+    static String getMissingCharacters(String word, String guess) {
+        String wrongCharacters = "";
+        // Find all wrong characters from the guess
+        for (int j = 0; j < word.length(); j++) {
+            // If a guess' char is found amount the missing chars
+            if (word.charAt(j) != guess.charAt(j)) {
+                wrongCharacters += word.charAt(j);
+            }
+        }
+        return wrongCharacters;
     }
 
     /***
