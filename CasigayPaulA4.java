@@ -48,6 +48,7 @@ public class CasigayPaulA4 {
 
         printMenu(aBucks); // Print the initial menu
 
+        printWordleGuess("goopa", "goopa");
         // TODO: complete main method
     }
 
@@ -135,12 +136,30 @@ public class CasigayPaulA4 {
     }
 
     /***
-     * Comments here
+     * 
      ***/
     // printWordleGuess Function
     // TODO: Implement the function.
-    static void printWordleGuess() {
+    static void printWordleGuess(String word, String guess) {
+        String wordleString = "";
+        String missing = "";
+        for (int i = 0; i < word.length(); i++) {
+            char guessChar = guess.charAt(i);
+            int missingCharIndex = missing.indexOf(guessChar);
 
+            if (word.charAt(i) == guess.charAt(i)) {
+                wordleString += GREEN + guess.charAt(i) + RESET;
+            }
+            // If a guess' char is found amount the missing chars
+            else if (missingCharIndex != -1) {
+                wordleString += YELLOW + guess.charAt(i) + RESET;
+                missing += word.charAt(i);
+            } else {
+                wordleString += guess.charAt(i);
+                missing += word.charAt(i);
+            }
+        }
+        System.out.println(wordleString);
     }
 
     /***
@@ -180,7 +199,7 @@ public class CasigayPaulA4 {
                          """ + RESET);
 
         // TODO: Implement the rest of the function.
-
+        return 0;
     }
 
     /***
@@ -201,7 +220,7 @@ public class CasigayPaulA4 {
                         + RESET);
 
         // TODO: Implement the rest of the function.
-
+        return 0;
     }
 
     /***
@@ -222,7 +241,7 @@ public class CasigayPaulA4 {
                         + RESET);
 
         // TODO: Implement the rest of the function.
-
+        return 0;
     }
 
     /***
@@ -237,7 +256,7 @@ public class CasigayPaulA4 {
                     """ + RESET);
 
         // TODO: Implement the rest of the function.
-
+        return 0;
     }
 
     /***
@@ -274,6 +293,7 @@ public class CasigayPaulA4 {
         // Set the number of allowed trials
 
         // Loop until user guesses correctly or runs out of trials
+        return 0;
     }
 
     // End Wordle
