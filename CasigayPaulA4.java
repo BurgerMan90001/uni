@@ -206,10 +206,6 @@ public class CasigayPaulA4 {
         return successRate;
     }
 
-    static double getRandomNum(double min, double max) {
-        return (Math.random() * (max - min)) + min;
-    }
-
     /***
      * Returns 50 A-Bucks if the
      ***/
@@ -227,6 +223,18 @@ public class CasigayPaulA4 {
     // Checks if number is in inclusive range
     static boolean isInRange(int num, int min, int max) {
         return (num >= min) && (num <= max);
+    }
+
+    static double getRandomNum(double min, double max) {
+        return (Math.random() * (max - min)) + min;
+    }
+
+    static void printWinMessage(int aBucksWon) {
+        System.out.println(GREEN + "WIN +" + aBucksWon + " aBucks" + RESET);
+    }
+
+    static void printLoseMessage() {
+        System.out.println(RED + "LOSE" + RESET);
     }
     // Game Functions *********************************
 
@@ -289,9 +297,10 @@ public class CasigayPaulA4 {
         if (safeOpened) {
             aBucksWon += attempts * ABUCKS_PER_ATTEMPT;
             aBucksWon += WIN_REWARD;
-            System.out.println("WIN +" + aBucksWon + " aBucks won");
+            printWinMessage(aBucksWon);
         } else {
-            System.out.println("LOOSE. Did not win within 15 attempts +0 aBucks won");
+            printLoseMessage();
+            System.out.println(RED + "Did not win within 15 attempts +0 aBucks won" + RESET);
         }
 
         return aBucksWon;
@@ -316,6 +325,8 @@ public class CasigayPaulA4 {
         int waldoDifference;
         int playerDifference;
 
+        int aBucksWon = 0;
+
         // Display game introduction and rules
         System.out.println(
                 YELLOW + """
@@ -329,32 +340,37 @@ public class CasigayPaulA4 {
                         """
                         + RESET);
         while (input.charAt(0) != QUIT_KEY) {
-            System.out.print("Pick a number between 0 and 100.");
+            System.out.print("Pick a number between 0 and 100: ");
             input = scan.next();
-            if (isDigitsOnly(input)) {
+
+            if (input.charAt(0) == QUIT_KEY) {
+                System.out.println("Won " + aBucksWon + " quiting game.");
+            } else if (isDigitsOnly(input)) {
                 int inputNum = Integer.parseInt(input);
-
+                // if inputNum is in [0, 100]
                 if (isInRange(inputNum, WALDO_MIN, WALDO_MAX)) {
-
                     waldoNum = rand.nextInt(0, 100);
                     targetNum = rand.nextInt(0, 100);
 
                     waldoDifference = difference(waldoNum, targetNum);
                     playerDifference = difference(inputNum, targetNum);
-                    if (waldoDifference < playerDifference) {
-                        System.out.println("LOOSE");
-                    } else {
-                        System.out.println("WIN +" + WIN_REWARD + " aBucks");
-                    }
 
+                    if (waldoDifference < playerDifference) {
+                        printLoseMessage();
+                        System.out.println("Target number: " + targetNum + " | Waldo's guess: " + waldoNum);
+                    } else {
+                        printWinMessage(aBucksWon);
+                        System.out.println("Target number: " + targetNum + " | Waldo's guess: " + waldoNum);
+                        aBucksWon += WIN_REWARD;
+                    }
                 } else {
                     System.out.println("Number is out of the range");
                 }
             } else {
-
+                System.out.println("Input is not a number! Waldo won this round ");
             }
         }
-        return 0;
+        return aBucksWon;
     }
 
     /***
