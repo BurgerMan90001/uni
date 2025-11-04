@@ -292,6 +292,9 @@ public class CasigayPaulA4 {
      ***/
     static int waldoDuel(Scanner scan, Random rand) {
         // Display game introduction and rules
+        final char QUIT_KEY = 'q';
+        char inputChar = ' ';
+
         System.out.println(
                 YELLOW + """
                         \n ----- Welcome to the Duel with Waldo game ----- \n
@@ -303,8 +306,9 @@ public class CasigayPaulA4 {
                         -> Each time you win, you will gain 100 A-Bucks! GOOD LUCK!
                         """
                         + RESET);
+        while (inputChar != QUIT_KEY) {
 
-        // TODO: Implement the rest of the function.
+        }
         return 0;
     }
 
