@@ -51,7 +51,8 @@ public class CasigayPaulA4 {
         printWordleGuess("goopa",
                 "goopa");
         // TODO: complete main method
-        System.out.println(safecracker(scan, rand));
+        System.out.println(waldoDuel(scan, rand));
+        // System.out.println(safecracker(scan, rand));
         // System.out.println(getSuccessRate(0.3, false));
         // System.out.println(shootBasketball(0.2));
     }
@@ -222,6 +223,11 @@ public class CasigayPaulA4 {
         }
         return aBucksWon;
     }
+
+    // Checks if number is in inclusive range
+    static boolean isInRange(int num, int min, int max) {
+        return (num >= min) && (num <= max);
+    }
     // Game Functions *********************************
 
     /***
@@ -233,13 +239,16 @@ public class CasigayPaulA4 {
         final int ABUCKS_PER_ATTEMPT = 100;
         final int WIN_REWARD = 5000;
 
+        final int COMBINATION_MIN = 0;
+        final int COMBINATION_MAX = 9999;
+
         int attempts = 15;
         int aBucksWon = 0;
 
         boolean safeOpened = false;
 
         // Initialize a random number between [0, 10000) to be the safe combination
-        int combination = random.nextInt(0, 10000);
+        int combination = random.nextInt(COMBINATION_MIN, COMBINATION_MAX + 1);
         // Display game instructions and welcome message
         System.out.println(YELLOW + """
                 \n ----- Welcome to the Safecracker ----- \n
@@ -259,15 +268,15 @@ public class CasigayPaulA4 {
             } else {
                 int guess = Integer.parseInt(guessString);
                 // Guess is out of range
-                if (guess < 0 || guess > 10000) {
+                if (!isInRange(guess, COMBINATION_MIN, COMBINATION_MAX)) {
                     System.out.println("Guess is out of range, try again.");
                 }
                 // Valid input but wrong
                 else if (guess != combination) {
                     if (guess > combination) {
-                        System.out.printf("%04d is higher than the combination.", guess);
+                        System.out.printf("%04d is higher than the combination.\n", guess);
                     } else {
-                        System.out.printf("%04d is lower than the combination.", guess);
+                        System.out.printf("%04d is lower than the combination.\n", guess);
                     }
                 }
                 // Guess is corect combination
@@ -282,7 +291,7 @@ public class CasigayPaulA4 {
             aBucksWon += WIN_REWARD;
             System.out.println("WIN +" + aBucksWon + " aBucks won");
         } else {
-            System.out.println("LOOSE. did not win within 15 attempts +0 aBucks won");
+            System.out.println("LOOSE. Did not win within 15 attempts +0 aBucks won");
         }
 
         return aBucksWon;
@@ -292,8 +301,20 @@ public class CasigayPaulA4 {
      * Comments here
      ***/
     static int waldoDuel(Scanner scan, Random rand) {
+
         final char QUIT_KEY = 'q';
-        char inputChar = ' ';
+        String input = "p";
+
+        final int WALDO_MIN = 0;
+        final int WALDO_MAX = 100;
+
+        final int WIN_REWARD = 100;
+
+        int targetNum;
+        int waldoNum;
+
+        int waldoDifference;
+        int playerDifference;
 
         // Display game introduction and rules
         System.out.println(
@@ -307,9 +328,31 @@ public class CasigayPaulA4 {
                         -> Each time you win, you will gain 100 A-Bucks! GOOD LUCK!
                         """
                         + RESET);
-        while (inputChar != QUIT_KEY) {
-            inputChar = scan.next().charAt(0);
+        while (input.charAt(0) != QUIT_KEY) {
+            System.out.print("Pick a number between 0 and 100.");
+            input = scan.next();
+            if (isDigitsOnly(input)) {
+                int inputNum = Integer.parseInt(input);
 
+                if (isInRange(inputNum, WALDO_MIN, WALDO_MAX)) {
+
+                    waldoNum = rand.nextInt(0, 100);
+                    targetNum = rand.nextInt(0, 100);
+
+                    waldoDifference = difference(waldoNum, targetNum);
+                    playerDifference = difference(inputNum, targetNum);
+                    if (waldoDifference < playerDifference) {
+                        System.out.println("LOOSE");
+                    } else {
+                        System.out.println("WIN +" + WIN_REWARD + " aBucks");
+                    }
+
+                } else {
+                    System.out.println("Number is out of the range");
+                }
+            } else {
+
+            }
         }
         return 0;
     }
