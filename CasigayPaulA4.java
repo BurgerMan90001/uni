@@ -225,7 +225,8 @@ public class CasigayPaulA4 {
     // Game Functions *********************************
 
     /***
-     * Comments here
+     * A game where you try to guess a safe's four digit combination within 15
+     * tries.
      ***/
     static int safecracker(Scanner scan, Random random) {
         // abucks per remaining attempt
@@ -291,10 +292,10 @@ public class CasigayPaulA4 {
      * Comments here
      ***/
     static int waldoDuel(Scanner scan, Random rand) {
-        // Display game introduction and rules
         final char QUIT_KEY = 'q';
         char inputChar = ' ';
 
+        // Display game introduction and rules
         System.out.println(
                 YELLOW + """
                         \n ----- Welcome to the Duel with Waldo game ----- \n
@@ -307,6 +308,7 @@ public class CasigayPaulA4 {
                         """
                         + RESET);
         while (inputChar != QUIT_KEY) {
+            inputChar = scan.next().charAt(0);
 
         }
         return 0;

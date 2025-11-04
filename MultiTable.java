@@ -36,7 +36,7 @@ public class MultiTable {
                 }
                 if (i == 1) {
                     // System.out.printf("%3d", i * j);
-                    System.out.printf("-");
+                    // System.out.printf("-");
                 }
             }
             System.out.println();
