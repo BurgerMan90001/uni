@@ -314,7 +314,7 @@ public class CasigayPaulA4 {
 
         final int WALDO_MIN = 0;
         final int WALDO_MAX = 100;
-
+        // abucks reward for each round won
         final int WIN_REWARD = 100;
 
         String input = " ";
@@ -326,6 +326,8 @@ public class CasigayPaulA4 {
         int playerDifference;
 
         int aBucksWon = 0;
+
+        boolean quitKeyPressed = false;
 
         // Display game introduction and rules
         System.out.println(
@@ -339,18 +341,20 @@ public class CasigayPaulA4 {
                         -> Each time you win, you will gain 100 A-Bucks! GOOD LUCK!
                         """
                         + RESET);
-        while (input.charAt(0) != QUIT_KEY) {
+
+        while (!quitKeyPressed) {
             System.out.print("Pick a number between 0 and 100: ");
             input = scan.next();
+            quitKeyPressed = input.charAt(0) == QUIT_KEY && input.length() == 1;
 
-            if (input.charAt(0) == QUIT_KEY) {
+            if (quitKeyPressed) {
                 System.out.println("Won " + aBucksWon + " aBucks. quiting game.");
             } else if (isDigitsOnly(input)) {
                 int inputNum = Integer.parseInt(input);
                 // if inputNum is in [0, 100]
                 if (isInRange(inputNum, WALDO_MIN, WALDO_MAX)) {
-                    waldoNum = rand.nextInt(0, 100);
-                    targetNum = rand.nextInt(0, 100);
+                    waldoNum = rand.nextInt(WALDO_MIN, WALDO_MAX);
+                    targetNum = rand.nextInt(WALDO_MIN, WALDO_MAX);
 
                     waldoDifference = difference(waldoNum, targetNum);
                     playerDifference = difference(inputNum, targetNum);
@@ -358,9 +362,9 @@ public class CasigayPaulA4 {
                     if (waldoDifference < playerDifference) {
                         printLoseMessage();
                         System.out.println("Target number: " + targetNum + " | Waldo's guess: " + waldoNum);
+                        System.out.println("Waldo is closer than your guess.");
                     } else {
                         aBucksWon += WIN_REWARD;
-
                         printWinMessage(WIN_REWARD);
                         System.out.println(GREEN + "TOTAL: " + aBucksWon + " aBucks" + RESET);
                         System.out.println("Target number: " + targetNum + " | Waldo's guess: " + waldoNum);
@@ -394,7 +398,6 @@ public class CasigayPaulA4 {
                                  """
                         + RESET);
 
-        // TODO: Implement the rest of the function.
         return 0;
     }
 
