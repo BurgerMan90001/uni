@@ -310,14 +310,14 @@ public class CasigayPaulA4 {
      * Comments here
      ***/
     static int waldoDuel(Scanner scan, Random rand) {
-
         final char QUIT_KEY = 'q';
-        String input = "p";
 
         final int WALDO_MIN = 0;
         final int WALDO_MAX = 100;
 
         final int WIN_REWARD = 100;
+
+        String input = " ";
 
         int targetNum;
         int waldoNum;
@@ -344,7 +344,7 @@ public class CasigayPaulA4 {
             input = scan.next();
 
             if (input.charAt(0) == QUIT_KEY) {
-                System.out.println("Won " + aBucksWon + " quiting game.");
+                System.out.println("Won " + aBucksWon + " aBucks. quiting game.");
             } else if (isDigitsOnly(input)) {
                 int inputNum = Integer.parseInt(input);
                 // if inputNum is in [0, 100]
@@ -359,15 +359,19 @@ public class CasigayPaulA4 {
                         printLoseMessage();
                         System.out.println("Target number: " + targetNum + " | Waldo's guess: " + waldoNum);
                     } else {
-                        printWinMessage(aBucksWon);
-                        System.out.println("Target number: " + targetNum + " | Waldo's guess: " + waldoNum);
                         aBucksWon += WIN_REWARD;
+
+                        printWinMessage(WIN_REWARD);
+                        System.out.println(GREEN + "TOTAL: " + aBucksWon + " aBucks" + RESET);
+                        System.out.println("Target number: " + targetNum + " | Waldo's guess: " + waldoNum);
                     }
                 } else {
-                    System.out.println("Number is out of the range");
+                    printLoseMessage();
+                    System.out.println("Number is out of the range. Waldo won this round.");
                 }
             } else {
-                System.out.println("Input is not a number! Waldo won this round ");
+                printLoseMessage();
+                System.out.println("Input is not a number! Waldo won this round.");
             }
         }
         return aBucksWon;
