@@ -307,7 +307,8 @@ public class CasigayPaulA4 {
     }
 
     /***
-     * Comments here
+     * Compete against waldo to choose the closest number to a randomly generated
+     * number between 0 and 100.
      ***/
     static int waldoDuel(Scanner scan, Random rand) {
         final char QUIT_KEY = 'q';
