@@ -51,8 +51,8 @@ public class CasigayPaulA4 {
         printWordleGuess("goopa",
                 "goopa");
         // TODO: complete main method
-        System.out.println(waldoDuel(scan, rand));
-        // System.out.println(safecracker(scan, rand));
+        // System.out.println(waldoDuel(scan, rand));
+        System.out.println(safecracker(scan, rand));
         // System.out.println(getSuccessRate(0.3, false));
         // System.out.println(shootBasketball(0.2));
     }
@@ -115,6 +115,15 @@ public class CasigayPaulA4 {
         return reversedNum;
     }
 
+    // tes THEANSWERIS
+    // .
+    // key INSPIRE
+    // 8|13|18|15|8|17|4
+    // .
+    // . BB DXDV E KEWPBZZM
+    // 11 3|23|3|21 10|4|22|15|2|25|25|12
+    // 8|13 18|15|8|17 4|
+    //
     /***
      * Only true when both the number and its reverse are prime numbers
      ***/
@@ -186,7 +195,7 @@ public class CasigayPaulA4 {
      * Gives a random success rate that is higher or lower than the initialRate
      ***/
     // getSuccessRate Function
-    static double getSuccessRate(double initialRate, boolean shouldBeHigher) {
+    static double getSuccessRate(Random rand, double initialRate, boolean shouldBeHigher) {
         double successRate = 0.0;
         double randomRate = 0.0;
 
@@ -194,7 +203,7 @@ public class CasigayPaulA4 {
         boolean validLowerRate = false;
         // Loop while there is no valid higher and lower rate
         while (!validHigherRate && !validLowerRate) {
-            randomRate = getRandomNum(0.10, 1.0);
+            randomRate = getRandomNum(rand, 0.10, 1.0);
 
             validHigherRate = shouldBeHigher && randomRate > initialRate;
             validLowerRate = !shouldBeHigher && randomRate < initialRate;
@@ -207,7 +216,7 @@ public class CasigayPaulA4 {
     }
 
     /***
-     * Returns 50 A-Bucks if the
+     * Returns 50 A-Bucks if the shot basketball goes in
      ***/
     // shootBasketball Function
     static int shootBasketball(double successRate) {
@@ -225,8 +234,8 @@ public class CasigayPaulA4 {
         return (num >= min) && (num <= max);
     }
 
-    static double getRandomNum(double min, double max) {
-        return (Math.random() * (max - min)) + min;
+    static double getRandomNum(Random rand, double min, double max) {
+        return (rand.nextDouble() * (max - min)) + min;
     }
 
     static void printWinMessage(int aBucksWon) {
@@ -282,9 +291,9 @@ public class CasigayPaulA4 {
                 // Valid input but wrong
                 else if (guess != combination) {
                     if (guess > combination) {
-                        System.out.printf("%04d is higher than the combination.\n", guess);
+                        System.out.printf(CYAN + "%04d is higher than the combination.\n" + RESET, guess);
                     } else {
-                        System.out.printf("%04d is lower than the combination.\n", guess);
+                        System.out.printf(YELLOW + "%04d is lower than the combination.\n" + RESET, guess);
                     }
                 }
                 // Guess is corect combination
@@ -386,6 +395,29 @@ public class CasigayPaulA4 {
      * Comments here
      ***/
     static int sharpshooter(Scanner scan, Random rand) {
+        int numShots = 5;
+
+        int aBucksWon = 0;
+
+        String input;
+
+        double successRate;
+
+        while (numShots > 0) {
+            successRate = getRandomNum(rand, 0.10, 1.0);
+
+            System.out.print("Shoot or pass the basketball: ");
+            input = scan.next();
+
+            switch (input) {
+                case "shoot":
+                    break;
+                case "pass":
+                    break;
+                default:
+                    break;
+            }
+        }
         System.out.println(
                 YELLOW + """
                         \n ----- Welcome to the SharpShooter game ----- \n
@@ -399,7 +431,7 @@ public class CasigayPaulA4 {
                                  """
                         + RESET);
 
-        return 0;
+        return aBucksWon;
     }
 
     /***
@@ -445,13 +477,12 @@ public class CasigayPaulA4 {
                         + RESET);
 
         // TODO: Implement the rest of the function.
-
-        // Display game introduction and rules
+        int aBucksWon = 0;
 
         // Set the number of allowed trials
 
         // Loop until user guesses correctly or runs out of trials
-        return 0;
+        return aBucksWon;
     }
 
     // End Wordle
