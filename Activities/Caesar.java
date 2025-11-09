@@ -1,3 +1,5 @@
+package Activities;
+
 public class Caesar {
     public static void main(String[] args) {
         String appleWord = "apple";

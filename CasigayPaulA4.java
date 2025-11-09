@@ -9,7 +9,6 @@ import java.util.Scanner;
 * ASSIGNMENT: 4
 * QUESTION: 1
 *
-* PURPOSE: 
 */
 public class CasigayPaulA4 {
     // Color constants for text formatting (use as recommended below for students)
