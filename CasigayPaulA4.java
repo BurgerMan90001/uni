@@ -36,9 +36,6 @@ public class CasigayPaulA4 {
             "Zebra", "Aloha", "Blaze", "Charm", "Dream"
     };
 
-    /***
-     * Comments here
-     ***/
     // main Function
     public static void main(String[] args) {
         System.out.println(PURPLE + "****** Welcome to Activate Winnipeg of Dimension W110111010 ******" + RESET);
@@ -46,15 +43,45 @@ public class CasigayPaulA4 {
         Random rand = new Random(); // Random number generator
         int aBucks = 0; // Player's A-Bucks balance
 
-        printMenu(aBucks); // Print the initial menu
+        final String QUIT_WORD = "exit";
+        String input;
 
-        printWordleGuess("goopa",
-                "goopa");
-        // TODO: complete main method
-        // System.out.println(waldoDuel(scan, rand));
-        System.out.println(safecracker(scan, rand));
-        // System.out.println(getSuccessRate(0.3, false));
-        // System.out.println(shootBasketball(0.2));
+        boolean exited = false;
+
+        while (!exited) {
+            // Print the initial menu
+            printMenu(aBucks);
+            System.out.print("-> ");
+            input = scan.next();
+            exited = input.equalsIgnoreCase(QUIT_WORD);
+
+            // If player typed in "quit"
+            if (exited) {
+                printlnYellow("Total A-Bucks won: " + aBucks + " goodbye.");
+            } else {
+                switch (input) {
+                    case "1":
+                        aBucks += safecracker(scan, rand);
+                        break;
+                    case "2":
+                        aBucks += waldoDuel(scan, rand);
+                        break;
+                    case "3":
+                        aBucks += sharpshooter(scan, rand);
+                        break;
+                    case "4":
+                        aBucks += primeMirrors(scan);
+                        break;
+                    case "5":
+                        aBucks += wordle(scan, rand);
+                        break;
+                    default:
+                        System.out.println("Invalid input. Try again.");
+                        break;
+                }
+            }
+
+        }
     }
 
     // Utility Functions *********************************
@@ -115,15 +142,6 @@ public class CasigayPaulA4 {
         return reversedNum;
     }
 
-    // tes THEANSWERIS
-    // .
-    // key INSPIRE
-    // 8|13|18|15|8|17|4
-    // .
-    // . BB DXDV E KEWPBZZM
-    // 11 3|23|3|21 10|4|22|15|2|25|25|12
-    // 8|13 18|15|8|17 4|
-    //
     /***
      * Only true when both the number and its reverse are prime numbers
      ***/
@@ -137,11 +155,11 @@ public class CasigayPaulA4 {
 
     static boolean isPrimeNumber(int num) {
         boolean isPrimeNumber = true;
-        if ((num % 2 == 0) && (num != 2)) {
+        if (num <= 1) {
             isPrimeNumber = false;
         } else {
-            for (int i = 3; i < num; i += 2) {
-                if ((num % i == 0) && (i != num)) {
+            for (int i = 2; i < num; i++) {
+                if (num % i == 0) {
                     isPrimeNumber = false;
                 }
             }
@@ -154,6 +172,7 @@ public class CasigayPaulA4 {
      * A green letter is correct and matches the word's letter.
      * A yellow letter means that the word contains the letter but is at the wrong
      * position.
+     * A red letter means that it is incorrect.
      * Otherwise it's incorrect.
      ***/
     // printWordleGuess Function
@@ -165,16 +184,15 @@ public class CasigayPaulA4 {
             int missingCharIndex = missingCharacters.indexOf(guessChar);
 
             if (word.charAt(i) == guess.charAt(i)) {
-                wordleString += GREEN + guess.charAt(i) + RESET;
+                wordleString += GREEN + guess.charAt(i) + " " + RESET;
             }
             // If there is a missing character found
             else if (missingCharIndex != -1) {
-                wordleString += YELLOW + guess.charAt(i) + RESET;
+                wordleString += YELLOW + guess.charAt(i) + " " + RESET;
             } else {
-                wordleString += guessChar;
+                wordleString += RED + guessChar + " " + RESET;
             }
         }
-
         System.out.println(wordleString);
     }
 
@@ -216,7 +234,7 @@ public class CasigayPaulA4 {
     }
 
     /***
-     * Returns 50 A-Bucks if the shot basketball goes in
+     * Returns 50 A-Bucks if the shot basketball goes in or 0 if it misses.
      ***/
     // shootBasketball Function
     static int shootBasketball(double successRate) {
@@ -238,13 +256,41 @@ public class CasigayPaulA4 {
         return (rand.nextDouble() * (max - min)) + min;
     }
 
-    static void printWinMessage(int aBucksWon) {
-        System.out.println(GREEN + "WIN +" + aBucksWon + " aBucks" + RESET);
+    static void printQuitMessage(int aBucksWon) {
+        printlnGreen("Won a total of +" + aBucksWon + " aBucks. quiting game");
     }
 
     static void printLoseMessage() {
-        System.out.println(RED + "LOSE" + RESET);
+        printlnRed("LOSE");
     }
+
+    static void printShotResult(int aBucksWon) {
+        if (aBucksWon > 0) {
+            printlnGreen("The shot went in!");
+        } else {
+            printlnRed("The shot missed");
+        }
+    }
+
+    /***
+     * Is true when first character is q and the input is only one letter
+     ***/
+    static boolean isQuitKey(String input) {
+        return (input.charAt(0) == 'q') && (input.length() == 1);
+    }
+
+    static void printlnGreen(String message) {
+        System.out.println(GREEN + message + RESET);
+    }
+
+    static void printlnRed(String message) {
+        System.out.println(RED + message + RESET);
+    }
+
+    static void printlnYellow(String message) {
+        System.out.println(YELLOW + message + RESET);
+    }
+
     // Game Functions *********************************
 
     /***
@@ -264,6 +310,9 @@ public class CasigayPaulA4 {
 
         boolean safeOpened = false;
 
+        String guessString;
+        int guess;
+
         // Initialize a random number between [0, 10000) to be the safe combination
         int combination = random.nextInt(COMBINATION_MIN, COMBINATION_MAX + 1);
         // Display game instructions and welcome message
@@ -278,17 +327,19 @@ public class CasigayPaulA4 {
 
         while (attempts > 0 && !safeOpened) {
             System.out.print("Enter combination guess (attempts " + attempts + "): ");
-            String guessString = scan.next();
+            guessString = scan.next();
             // If the input is not a number.
             if (!isDigitsOnly(guessString)) {
                 System.out.println("Guess is not a number, try again.");
-            } else {
-                int guess = Integer.parseInt(guessString);
-                // Guess is out of range
+            }
+            // The input is a number and can be turned into an int
+            else {
+                guess = Integer.parseInt(guessString);
+                // If guess is out of range
                 if (!isInRange(guess, COMBINATION_MIN, COMBINATION_MAX)) {
                     System.out.println("Guess is out of range, try again.");
                 }
-                // Valid input but wrong
+                // Valid input but wrong combination guess
                 else if (guess != combination) {
                     if (guess > combination) {
                         System.out.printf(CYAN + "%04d is higher than the combination.\n" + RESET, guess);
@@ -306,10 +357,9 @@ public class CasigayPaulA4 {
         if (safeOpened) {
             aBucksWon += attempts * ABUCKS_PER_ATTEMPT;
             aBucksWon += WIN_REWARD;
-            printWinMessage(aBucksWon);
+            printQuitMessage(aBucksWon);
         } else {
-            printLoseMessage();
-            System.out.println(RED + "Did not win within 15 attempts +0 aBucks won" + RESET);
+            printlnRed("Did not win within 15 attempts +0 aBucks won");
         }
 
         return aBucksWon;
@@ -327,16 +377,15 @@ public class CasigayPaulA4 {
         // abucks reward for each round won
         final int WIN_REWARD = 100;
 
-        String input = " ";
+        String input;
+        int inputNum;
 
         int targetNum;
         int waldoNum;
-
         int waldoDifference;
         int playerDifference;
 
         int aBucksWon = 0;
-
         boolean quitKeyPressed = false;
 
         // Display game introduction and rules
@@ -353,14 +402,16 @@ public class CasigayPaulA4 {
                         + RESET);
 
         while (!quitKeyPressed) {
-            System.out.print("Pick a number between 0 and 100: ");
+            System.out.print("Pick a number between 0 and 100 (q to quit): ");
             input = scan.next();
-            quitKeyPressed = input.charAt(0) == QUIT_KEY && input.length() == 1;
+            quitKeyPressed = isQuitKey(input);
 
             if (quitKeyPressed) {
-                System.out.println("Won " + aBucksWon + " aBucks. quiting game.");
-            } else if (isDigitsOnly(input)) {
-                int inputNum = Integer.parseInt(input);
+                printQuitMessage(aBucksWon);
+            }
+            // If input is a number
+            else if (isDigitsOnly(input)) {
+                inputNum = Integer.parseInt(input);
                 // if inputNum is in [0, 100]
                 if (isInRange(inputNum, WALDO_MIN, WALDO_MAX)) {
                     waldoNum = rand.nextInt(WALDO_MIN, WALDO_MAX);
@@ -368,17 +419,18 @@ public class CasigayPaulA4 {
 
                     waldoDifference = difference(waldoNum, targetNum);
                     playerDifference = difference(inputNum, targetNum);
-
+                    // If waldo is closer to the target number
                     if (waldoDifference < playerDifference) {
                         printLoseMessage();
-                        System.out.println("Target number: " + targetNum + " | Waldo's guess: " + waldoNum);
-                        System.out.println("Waldo is closer than your guess.");
-                    } else {
-                        aBucksWon += WIN_REWARD;
-                        printWinMessage(WIN_REWARD);
-                        System.out.println(GREEN + "TOTAL: " + aBucksWon + " aBucks" + RESET);
-                        System.out.println("Target number: " + targetNum + " | Waldo's guess: " + waldoNum);
+                        printlnRed("Waldo is closer than your guess.");
                     }
+                    // If the player is closer to the target number
+                    else {
+                        aBucksWon += WIN_REWARD;
+                        printlnGreen("WIN +" + WIN_REWARD + " aBucks");
+                        printlnGreen("TOTAL: " + aBucksWon + " aBucks");
+                    }
+                    printlnYellow("Target number: " + targetNum + " | Waldo's guess: " + waldoNum);
                 } else {
                     printLoseMessage();
                     System.out.println("Number is out of the range. Waldo won this round.");
@@ -392,32 +444,20 @@ public class CasigayPaulA4 {
     }
 
     /***
-     * Comments here
+     * A game based on chance. Shoot basket balls or pass to teamates to either
+     * raise or lower the chances of making a shot. Each successful shot is worth 50
+     * abucks.
      ***/
     static int sharpshooter(Scanner scan, Random rand) {
         int numShots = 5;
 
         int aBucksWon = 0;
+        int shotAbucks;
 
         String input;
-
         double successRate;
 
-        while (numShots > 0) {
-            successRate = getRandomNum(rand, 0.10, 1.0);
-
-            System.out.print("Shoot or pass the basketball: ");
-            input = scan.next();
-
-            switch (input) {
-                case "shoot":
-                    break;
-                case "pass":
-                    break;
-                default:
-                    break;
-            }
-        }
+        // Display game introduction and rules
         System.out.println(
                 YELLOW + """
                         \n ----- Welcome to the SharpShooter game ----- \n
@@ -431,13 +471,60 @@ public class CasigayPaulA4 {
                                  """
                         + RESET);
 
+        while (numShots > 0) {
+            successRate = getRandomNum(rand, 0.10, 1.0);
+            System.out.println("Number of shots left: " + numShots);
+            System.out.printf("Success rate: %.2f\n", successRate);
+
+            System.out.print("Shoot or pass the basketball: ");
+            input = scan.next();
+
+            switch (input) {
+                case "shoot":
+                    shotAbucks = shootBasketball(successRate);
+                    aBucksWon += shotAbucks;
+                    // Show if the shot was successful
+                    printShotResult(aBucksWon);
+                    break;
+                case "pass":
+                    // 40% chance to raise success rate
+                    if (rand.nextDouble() < 0.4) {
+                        // Generate a higher success rate than current rate
+                        successRate = getSuccessRate(rand, successRate, true);
+                        printlnGreen("The teamates success rate is higher.");
+                    }
+                    // 60% chanvce to lower success rate
+                    else {
+                        // Generate a lower success rate than current rate
+                        successRate = getSuccessRate(rand, successRate, false);
+                        printlnRed("The teamates success rate is lower.");
+                    }
+                    shotAbucks = shootBasketball(successRate);
+                    aBucksWon += shotAbucks;
+                    printShotResult(shotAbucks);
+                    break;
+                default:
+                    System.out.println("Input was not shoot or pass. Try again");
+                    break;
+            }
+            numShots--;
+        }
         return aBucksWon;
     }
 
     /***
-     * Comments here
+     * Guess a number where both its reverse and itself is a prime number.
      ***/
     static int primeMirrors(Scanner scan) {
+        final int WIN_REWARD = 300;
+
+        int aBucksWon = 0;
+
+        String input;
+        int inputNum;
+
+        boolean quitKeyPressed = false;
+
         // Display game introduction and rules
         System.out.println(YELLOW + """
                 \n ----- Welcome to the Hall of Prime Mirrors Game ----- \n
@@ -445,12 +532,32 @@ public class CasigayPaulA4 {
                 -> You will get unlimited guesses and for each correct guess, you will gain 300 A-Bucks.
                     """ + RESET);
 
-        // TODO: Implement the rest of the function.
-        return 0;
+        while (!quitKeyPressed) {
+            System.out.print("Enter prime mirror number guess (q to quit): ");
+            input = scan.next();
+
+            quitKeyPressed = isQuitKey(input);
+            if (quitKeyPressed) {
+                printQuitMessage(aBucksWon);
+            }
+            // Check if guess is a number
+            else if (isDigitsOnly(input)) {
+                inputNum = Integer.parseInt(input);
+                if (isPrimeMirror(inputNum)) {
+                    aBucksWon += WIN_REWARD;
+                    printlnGreen(input + " is a prime mirror! +" + WIN_REWARD + " aBucks");
+                } else {
+                    printlnRed(input + " is not a prime mirror");
+                }
+            } else {
+                printlnRed("Input is not a number! Try again.");
+            }
+        }
+        return aBucksWon;
     }
 
     /***
-     * Comments here
+     * Try to guess a five letter word within 6 tries.
      ***/
     // wordle Function
     static int wordle(Scanner scan, Random rand) {
@@ -462,6 +569,14 @@ public class CasigayPaulA4 {
         word = word.toUpperCase(); // DO NOT CHANGE *****************
         // ***********************************************************************************************
         // */
+        final int WIN_REWARD = 2500;
+        final int NUM_LETTERS = 5;
+
+        // Set the number of allowed trials
+        int trials = 6;
+        int aBucksWon = 0;
+        String input;
+        boolean wordGuesssed = false;
 
         // Display game introduction and rules
         System.out.println(
@@ -476,15 +591,28 @@ public class CasigayPaulA4 {
                             """
                         + RESET);
 
-        // TODO: Implement the rest of the function.
-        int aBucksWon = 0;
-
-        // Set the number of allowed trials
-
         // Loop until user guesses correctly or runs out of trials
+        while (trials > 0 && !wordGuesssed) {
+            System.out.println(trials + " trials left.");
+            System.out.print("Enter 5-letter guess: ");
+            input = scan.next().toUpperCase();
+
+            if (input.length() == NUM_LETTERS) {
+                wordGuesssed = word.equals(input);
+                printWordleGuess(word, input);
+            } else {
+                printlnRed("The word did not have five letters. Try again");
+            }
+            trials--;
+        }
+        if (wordGuesssed) {
+            aBucksWon += WIN_REWARD;
+            printlnGreen("You guessed the word correctly!");
+        } else {
+            printlnYellow(YELLOW + "You didn't guess the word within 6 tries. The word was " + word + ".");
+        }
+        printQuitMessage(aBucksWon);
         return aBucksWon;
     }
-
     // End Wordle
-
 }
