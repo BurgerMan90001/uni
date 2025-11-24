@@ -51,7 +51,7 @@ public class CasigayPaulA4 {
             // Print the initial menu
             printMenu(aBucks);
             System.out.print("-> ");
-            input = scan.next();
+            input = scan.nextLine();
             exited = input.equalsIgnoreCase(QUIT_WORD);
 
             // If player typed in "quit"
@@ -60,18 +60,23 @@ public class CasigayPaulA4 {
             } else {
                 switch (input) {
                     case "1":
+                        // case "Safecracker":
                         aBucks += safecracker(scan, rand);
                         break;
                     case "2":
+                        // case "Duel with Waldo":
                         aBucks += waldoDuel(scan, rand);
                         break;
                     case "3":
+                        // case "Sharpshooter":
                         aBucks += sharpshooter(scan, rand);
                         break;
                     case "4":
+                        // case "Hall of Prime Mirrors":
                         aBucks += primeMirrors(scan);
                         break;
                     case "5":
+                        // case "Wordle":
                         aBucks += wordle(scan, rand);
                         break;
                     default:
