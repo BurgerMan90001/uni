@@ -18,18 +18,43 @@ public class CasigayPaulA5Q1 {
 
         final int DATABASE_SIZE = 500;
 
-        // Parallel arrays
+        // Parallel arrays to form database
         int[] bookIDs = new int[DATABASE_SIZE];
         String[] titles = new String[DATABASE_SIZE];
         String[] authors = new String[DATABASE_SIZE];
 
         // Number of books in database
-        int copies;
+        int copies = 0;
 
         scnr.close();
     }
 
-    static void printMenu() {
+    static void printMenu(Scanner scnr) {
+        System.out.println("1: Add book");
+        System.out.println("2: Remove book");
+        System.out.println("3: Search book");
+        System.out.println("4: Update book");
+        System.out.println("5: Statistics");
+        System.out.println("6: Exit");
+        System.out.print("(1-6)");
+
+        scnr.nextLine();
+        String input = scnr.next();
+
+        switch (input) {
+            case "1":
+                break;
+            case "2":
+                break;
+            case "3":
+                break;
+            case "4":
+                break;
+            case "5":
+                break;
+            case "6":
+                break;
+        }
 
     }
 }
