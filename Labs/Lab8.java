@@ -1,3 +1,5 @@
+package Labs;
+
 public class Lab8 {
     public static void main(String[] args) {
         int[] arr = { 1, 23, 5, 6, 8, 0, 0, 0 };
