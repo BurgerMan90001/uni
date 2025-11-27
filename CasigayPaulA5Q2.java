@@ -10,7 +10,7 @@
 * PURPOSE: 
 */
 
-public class CasigayPaulA5Q1 {
+public class CasigayPaulA5Q2 {
     public static void main(String[] args) {
 
     }
