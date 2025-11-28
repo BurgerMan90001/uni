@@ -16,48 +16,81 @@ public class CasigayPaulA5Q2 {
     public static void main(String[] args) {
         Scanner scnr = new Scanner(System.in);
 
-        String test = "3 2";
-        int[] arr = toIntArray(test, 5);
-        printArray(arr, 5);
-        System.out.println(amountOfNumbers(test));
+        // First, get user input for number of letters
+        getNumLetters(scnr);
 
+        System.out.println("Program terminated.");
+        scnr.close();
+    }
+
+    /*
+     * First step, get user input for number of letters in secret word
+     */
+    static void getNumLetters(Scanner scnr) {
         System.out.print("Enter the number of letters in secret word: ");
         String numLettersInput = scnr.next();
+        // Advance scanner to next line for next input
         scnr.nextLine();
 
+        getScramblePattern(scnr, numLettersInput);
+    }
+
+    /*
+     * Next, get user input for scramble pattern, the original positions of each
+     * letter.
+     */
+    static void getScramblePattern(Scanner scnr, String numLettersInput) {
         if (isDigitsOnly(numLettersInput)) {
             int numLetters = Integer.parseInt(numLettersInput);
 
             System.out.printf("Enter the scrambling pattern (1-%d): ", numLetters);
             String scramblePattern = scnr.nextLine();
 
+            // Check if scramble pattern is valid
             if (isValidPattern(numLetters, scramblePattern)) {
 
-                // Can safely covert pattern string to an int array
+                // If it is valid, it can be safely coverted to an int array
                 int[] numPattern = toIntArray(scramblePattern, numLetters);
 
-                // If there isnt a number greater than the array's length
-                if (!numberOutOfRange(arr)) {
-                    System.out.print("Enter the scrambled word: ");
-                    String scrambledWord = scnr.next();
-
-                    // String unscrambledWord = unScrambleWord(noSpacesPattern, scrambledWord);
-                } else {
-                    System.out.println("Invalid input. Number out of range.");
-
-                }
-                printArray(numPattern, numLetters);
-
-            } else {
-                System.out.println("Invalid input. ");
+                // Then get the scrambled word
+                getScrambledWord(scnr, numPattern, numLetters);
             }
-
         } else {
-            System.out.println("Invalid input");
+            printError("Number of letters is not a number");
         }
 
-        scnr.close();
+    }
 
+    /*
+     * Then, get user input for the scrambled word. Checks if the scramble pattern
+     * has a number out of range before getting scrambled word.
+     */
+    static void getScrambledWord(Scanner scnr, int[] numPattern, int numLetters) {
+        // If there isnt a number greater than the array's length
+        if (!numberOutOfRange(numPattern)) {
+            // Get user input for scrambled word
+            System.out.print("Enter the scrambled word: ");
+            String scrambledWord = scnr.next();
+
+            // Get the original unscrambled word and print it
+            printOriginalWord(scrambledWord, numPattern, numLetters);
+        }
+        // There is a number greater than the array's length
+        else {
+            printError("Number out of range.");
+        }
+    }
+
+    /*
+     * Last step, unscrambles a scrambled word from and prints it
+     */
+    static void printOriginalWord(String scrambledWord, int[] numPattern, int numLetters) {
+        if (scrambledWord.length() == numLetters) {
+            String originalWord = unscrambleWord(numPattern, scrambledWord);
+            System.out.printf("Original word: %s\n", originalWord);
+        } else {
+            printError("Scrambled word length does not match number of letters");
+        }
     }
 
     /***
@@ -87,15 +120,14 @@ public class CasigayPaulA5Q2 {
 
         // If the scramble pattern is non-numeric
         if (!isDigitsOnly(pattern)) {
-
             // The pattern is invalid
             isValidPattern = false;
-            System.out.println("Pattern has contains non-numeric entries");
+            printError("Pattern has contains non-numeric entries");
         }
         // If the scramble pattern has more or less characters than number of letters
         else if (numLetters != amountOfNumbers(pattern)) {
             isValidPattern = false;
-            System.out.println("Pattern length does not match specified length");
+            printError("Pattern length does not match specified length");
         } else {
 
             // Can convert to int array since its all numbers and length is correct
@@ -104,8 +136,7 @@ public class CasigayPaulA5Q2 {
             // If there is duplicates, the pattern is invalid
             if (hasDuplicates(patternArr)) {
                 isValidPattern = false;
-
-                System.out.println("Pattern has duplicates");
+                printError("Pattern has duplicates");
             }
         }
 
@@ -122,6 +153,9 @@ public class CasigayPaulA5Q2 {
         return count;
     }
 
+    /*
+     * Converts a string with numbers separated by spaces into an int array
+     */
     static int[] toIntArray(String scramblePattern, int length) {
         int[] arr = new int[length];
         int nextSpaceIndex = scramblePattern.indexOf(' ');
@@ -129,13 +163,13 @@ public class CasigayPaulA5Q2 {
         for (int i = 0; i < length; i++) {
             nextSpaceIndex = scramblePattern.indexOf(' ');
             String numString;
-            // If there is another space
-            if (nextSpaceIndex != -1) {
-                // Get the first number
-                numString = scramblePattern.substring(0, nextSpaceIndex);
-            } else {
+            // If there are no more spaces
+            if (nextSpaceIndex == -1) {
                 // Get the last number if there is no space characters left
                 numString = scramblePattern.substring(0, scramblePattern.length());
+            } else {
+                // Get the first number
+                numString = scramblePattern.substring(0, nextSpaceIndex);
             }
             // Set array entry to number
             arr[i] = Integer.parseInt(numString);
@@ -146,9 +180,12 @@ public class CasigayPaulA5Q2 {
         return arr;
     }
 
+    /*
+     * Checks if a number in an int array is bigger than the length
+     */
     static boolean numberOutOfRange(int[] arr) {
         boolean numberOutOfRange = false;
-        for (int i = 0; i < arr.length; i++) {
+        for (int i = 0; i < arr.length && !numberOutOfRange; i++) {
             if (arr[i] > arr.length) {
                 numberOutOfRange = true;
             }
@@ -156,17 +193,37 @@ public class CasigayPaulA5Q2 {
         return numberOutOfRange;
     }
 
-    static String unScrambleWord(String noSpacesPattern, String word) {
-        String unScrambledWord = "";
-
-        for (int i = 0; i < noSpacesPattern.length(); i++) {
-            int position = noSpacesPattern.charAt(i);
-            System.out.print(position);
+    /*
+     * Checks if a number in an int array is bigger than the length
+     */
+    static String unscrambleWord(int[] numPattern, String word) {
+        String unscrambledWord = "";
+        // Start and one and end at the words length
+        for (int i = 1; i <= word.length(); i++) {
+            int index = search(numPattern, i);
+            unscrambledWord += word.charAt(index);
         }
 
-        return unScrambledWord;
+        return unscrambledWord;
     }
 
+    /*
+     * Gets the index of the specified number. The index is -1 if not found.
+     */
+    static int search(int[] arr, int number) {
+        int index = -1;
+        for (int i = 0; i < arr.length && index == -1; i++) {
+            if (arr[i] == number) {
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    /*
+     * Checks for duplicate numbers in an integer array.
+     * Is true if there is and false if not.
+     */
     static boolean hasDuplicates(int[] arr) {
         boolean hasDuplicates = false;
         for (int i = 0; i < arr.length; i++) {
@@ -181,27 +238,8 @@ public class CasigayPaulA5Q2 {
         return hasDuplicates;
     }
 
-    static String removeSpaces(String string) {
-        String stringNoSpaces = "";
-        boolean isNotSpace;
-        for (int i = 0; i < string.length(); i++) {
-            isNotSpace = !(string.charAt(i) == ' ');
-            if (isNotSpace) {
-                stringNoSpaces += string.charAt(i);
-            }
-        }
-        return stringNoSpaces;
-    }
-
-    static void printArray(int[] arr, int length) {
-        System.out.print("[");
-        for (int i = 0; i < length; i++) {
-            if (i != 0) {
-                System.out.print(", " + arr[i]);
-            } else {
-                System.out.print(arr[i]);
-            }
-        }
-        System.out.print("]\n");
+    // Prints an error for invalid input with a reason
+    static void printError(String error) {
+        System.out.printf("Invalid input. %s\n", error);
     }
 }
