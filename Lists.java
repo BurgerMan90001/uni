@@ -1,23 +1,26 @@
 public class Lists {
     public static void main(String[] args) {
-        int[] arr = new int[10];
-        int arrLength = 0;
+        int[] arr = { 1, 3, 4, 5, 6, 1, 0 };
+        int arrLength = arr.length - 1;
 
-        arrLength = insert(arr, arrLength, 1);
-        arrLength = insert(arr, arrLength, 2);
-        arrLength = insert(arr, arrLength, 7);
-        arrLength = insert(arr, arrLength, 2);
-        arrLength = insert(arr, arrLength, 10);
-
-        printArray(arr, arrLength);
-
-        int index = search(arr, arrLength, 26);
-        System.out.println(index);
-
-        arrLength = delete(arr, arrLength, 10);
-        printArray(arr, arrLength);
+        /*
+         * arrLength = insert(arr, arrLength, 1);
+         * arrLength = insert(arr, arrLength, 2);
+         * arrLength = insert(arr, arrLength, 7);
+         * arrLength = insert(arr, arrLength, 2);
+         * arrLength = insert(arr, arrLength, 10);
+         * 
+         * printArray(arr, arrLength);
+         * 
+         * int index = search(arr, arrLength, 26);
+         * System.out.println(index);
+         * 
+         * arrLength = delete(arr, arrLength, 10);
+         * printArray(arr, arrLength);
+         */
 
         arrLength = orderedInsert(arr, arrLength, 10);
+        // arrLength = orderedInsert(arr, arrLength, 10);
         printArray(arr, arrLength);
 
     }
