@@ -10,26 +10,7 @@ public class Ticket {
     }
 
     public String toString() {
-        return "";
-    }
-
-    public Flight getFlight() {
-        return this.flight;
-    }
-
-    public void setFlight(Flight flight) {
-        this.flight = flight;
-    }
-
-    public Passenger getPassenger() {
-        return this.passenger;
-    }
-
-    public void setPassenger(Passenger passenger) {
-        this.passenger = passenger;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+        return "Ticket Passenger: " + this.passenger.toString() + "\t. Flight: " + this.flight.toString() + "\t Price: "
+                + this.price;
     }
 }

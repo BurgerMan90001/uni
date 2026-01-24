@@ -10,9 +10,8 @@ public class Passenger {
     }
 
     public boolean isMinor(int currentYear) {
-        boolean isMinor = true;
         int age = currentYear - this.yearOfBirth;
-        isMinor = (age < 18) ? true : false;
+        boolean isMinor = (age < 18) ? true : false;
         return isMinor;
     }
 
@@ -35,14 +34,19 @@ public class Passenger {
     }
 
     public static int addPassenger(Passenger passenger, Passenger[] passengers, int size) {
-
+        passengers[size] = passenger;
+        size++;
+        return size;
     }
 
     public static void printPassengerNames(Passenger[] passengers, int size) {
-
+        for (int i = 0; i < size; i++) {
+            System.out.println(passengers[i].toString());
+        }
     }
 
     public String toString() {
-        return "";
+        return "Passenger,\n\t Name: " + this.name + "\n\t Country: " + this.citizenCountry + "\n\t Year of Birth: "
+                + this.yearOfBirth;
     }
 }
