@@ -10,7 +10,8 @@ public class Ticket {
     }
 
     public String toString() {
-        return "Ticket Passenger: " + this.passenger.toString() + "\t. Flight: " + this.flight.toString() + "\t Price: "
+        return "Ticket, \n Passenger: " + this.passenger.toString() + "\n. Flight: " + this.flight.toString()
+                + "\n Price: "
                 + this.price;
     }
 }
