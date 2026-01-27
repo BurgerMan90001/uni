@@ -3,7 +3,7 @@ public class Flight {
     private Airport depart;
     private Airport arrive;
 
-    public Flight(String code, Airport depart, Airport arrive) {
+    private Flight(String code, Airport depart, Airport arrive) {
         this.code = code;
         this.depart = depart;
         this.arrive = arrive;
@@ -13,8 +13,29 @@ public class Flight {
         return !this.depart.matchesCountry(this.arrive.getCountry());
     }
 
-    public String getCode() {
-        return this.code;
+    public static Flight createFlight(String code, Airport depart, Airport arrive) {
+        return new Flight(code, depart, arrive);
+    }
+
+    public static Flight[] createFlights(String[] code, String[] departCode, String[] arriveCode, Airport[] airports) {
+        Flight[] flights = new Flight[code.length];
+
+        for (int i = 0; i < airports.length; i++) {
+            Airport depart = findAirportCode(departCode[i], airports);
+            Airport arrive = findAirportCode(arriveCode[i], airports);
+            flights[i] = Flight.createFlight(code[i], depart, arrive);
+        }
+        return null;
+    }
+
+    public static Flight findFlightCode(String code, Flight[] flights) {
+        Flight flight = null;
+        for (int i = 0; i < flights.length; i++) {
+            if (code.equals(flights[i].code)) {
+                flight = flights[i];
+            }
+        }
+        return flight;
     }
 
     public String toString() {
